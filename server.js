@@ -1,5 +1,3 @@
-// const app = require('./app');
-
 const express = require('express');
 const helmet = require('helmet');
 const xss = require('xss-clean');
@@ -8,16 +6,16 @@ const cors = require('cors');
 const mongoSanitize = require('express-mongo-sanitize');
 const swaggerUI = require('swagger-ui-express');
 const createLocaleMiddleware = require('express-locale');
-const config = require('./config/config');
-const { successHandle, errorHandle } = require('./config/morgan');
-const limiter = require('./middlewares/rateLimiter');
-const errorHandler = require('./utils/errorHandler');
-const AppError = require('./utils/appError');
-const startPolyglot = require('./utils/startPolyglot');
-const docs = require('../docs/swagger');
-const routes = require('./routes');
-const logger = require('./config/logger');
-const connectDB = require('./config/db');
+const config = require('./src/config/config');
+const { successHandle, errorHandle } = require('./src/config/morgan');
+const limiter = require('./src/middlewares/rateLimiter');
+const errorHandler = require('./src/utils/errorHandler');
+const AppError = require('./src/utils/appError');
+const startPolyglot = require('./src/utils/startPolyglot');
+const docs = require('./docs/swagger');
+const routes = require('./src/routes');
+const logger = require('./src/config/logger');
+const connectDB = require('./src/config/db');
 const serverless = require('serverless-http')
 const app = express();
 app.enable('trust proxy');
