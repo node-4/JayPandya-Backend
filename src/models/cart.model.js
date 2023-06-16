@@ -1,6 +1,5 @@
-const mongoose = require('mongoose');
-const toJSON = require('./plugins/index');
-
+import mongoose from 'mongoose';
+import toJSON from './plugins/index';
 
 const cartSchema = mongoose.Schema(
   {
@@ -86,4 +85,4 @@ cartSchema.plugin(toJSON);
 
 const Cart = mongoose.model('Cart', cartSchema);
 
-module.exports = Cart;
+export default Cart;

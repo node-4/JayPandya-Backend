@@ -1,7 +1,7 @@
-const express = require('express');
+import express from 'express';
 
 // Controllers 
-const { notifyController } = require('../controllers');
+import { notifyController } from '../controllers';
 
 
 const {
@@ -19,6 +19,6 @@ router.route('/').get(getnotification).post(addnotification);
 router.route('/:id').patch(updatenotification).delete(deletenotification)
 
 
-module.exports = router;
+export default router;
 
 

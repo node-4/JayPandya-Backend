@@ -1,11 +1,11 @@
 // Packages
-const express = require('express');
+import express from 'express';
 
 // Middlewares
-const protect = require('../middlewares/protect');
+import protect from '../middlewares/protect';
 
 // Controllers
-const { reviewController } = require('../controllers/index');
+import { reviewController } from '../controllers/index';
 
 const { getAllReviews, getReview, addReview, updateReview, deleteReview } =
   reviewController;
@@ -29,4 +29,4 @@ router.post('/', addReview);
 // Delete Review Route
 router.route('/:reviewId').patch(updateReview).delete(deleteReview);
 
-module.exports = router;
+export default router;

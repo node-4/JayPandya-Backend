@@ -1,8 +1,8 @@
 // Utils
-const catchAsync = require('../utils/catchAsync');
+import catchAsync from '../utils/catchAsync';
 
 // Services
-const { discountService } = require('../services');
+import { discountService } from '../services';
 
 /**
  * @desc    Verify Discount Code Controller
@@ -10,7 +10,7 @@ const { discountService } = require('../services');
  * @param   { Object } res - Response object
  * @return  { JSON } - A JSON object representing the type, message and the codes
  */
-const getAllDiscountCodes = catchAsync(async (req, res) => {
+export const getAllDiscountCodes = catchAsync(async (req, res) => {
   // 1) Verify discount code
   const { type, message, statusCode, codes } =
     await discountService.getAllDiscountCodes(req);
@@ -38,7 +38,7 @@ const getAllDiscountCodes = catchAsync(async (req, res) => {
  * @property  { String } req.user.discountCode - Discount code
  * @return    { JSON } - A JSON object representing the type, message and discount
  */
-const getDiscount = catchAsync(async (req, res) => {
+export const getDiscount = catchAsync(async (req, res) => {
   // 1) Cancel discount code
   const { type, message, statusCode, discount } =
     await discountService.getDiscount(req.params.code);
@@ -67,7 +67,7 @@ const getDiscount = catchAsync(async (req, res) => {
  * @property  { Object } req.user - An object contains logged in user data
  * @return    { JSON } - A JSON object representing the type, message and the code
  */
-const verifyDiscountCode = catchAsync(async (req, res) => {
+export const verifyDiscountCode = catchAsync(async (req, res) => {
   // 1) Verify discount code
   const { type, message, statusCode, discount } =
     await discountService.verifyDiscountCode(req.body.discountCode, req.user);
@@ -99,7 +99,7 @@ const verifyDiscountCode = catchAsync(async (req, res) => {
  * @property  { Number } req.body.availableEnd - The end number of available discount code
  * @return    { JSON } - A JSON object representing the type, message and the discount code
  */
-const generateDiscountCode = catchAsync(async (req, res) => {
+export const generateDiscountCode = catchAsync(async (req, res) => {
   const {
     codeLength,
     discountStart,
@@ -140,7 +140,7 @@ const generateDiscountCode = catchAsync(async (req, res) => {
  * @property  { String } req.params.id - ID of discount code
  * @return    { JSON } - A JSON object representing the type and message
  */
-const deleteDiscountCode = catchAsync(async (req, res) => {
+export const deleteDiscountCode = catchAsync(async (req, res) => {
   // 1) Delete discount code
   const { type, message, statusCode } =
     await discountService.deleteDiscountCode(req.params.id);
@@ -168,7 +168,7 @@ const deleteDiscountCode = catchAsync(async (req, res) => {
  * @property  { String } req.user.id - ID of user
  * @return    { JSON } - A JSON object representing the type and message
  */
-const cancelDiscountCode = catchAsync(async (req, res) => {
+export const cancelDiscountCode = catchAsync(async (req, res) => {
   // 1) Cancel discount code
   const { type, message, statusCode } =
     await discountService.cancelDiscountCode(
@@ -190,4 +190,3 @@ const cancelDiscountCode = catchAsync(async (req, res) => {
     message: req.polyglot.t(message)
   });
 });
-module.exports = { getAllDiscountCodes, getDiscount, verifyDiscountCode, generateDiscountCode, deleteDiscountCode, cancelDiscountCode }

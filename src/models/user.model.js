@@ -1,8 +1,8 @@
-const mongoose = require('mongoose');
-const crypto = require('crypto');
-const validator = require('validator');
-const { hash, verify } = require('argon2');
-const toJSON = require('./plugins/index');
+import mongoose from 'mongoose';
+import crypto from 'crypto';
+import validator from 'validator';
+import { hash, verify } from 'argon2';
+import toJSON from './plugins/index';
 
 const userSchema = mongoose.Schema(
   {
@@ -152,4 +152,4 @@ userSchema.methods.changedPasswordAfter = function (JWTTimestamp) {
  */
 const User = mongoose.model('User', userSchema);
 
-module.exports = User;
+export default User;

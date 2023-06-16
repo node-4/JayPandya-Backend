@@ -1,4 +1,4 @@
-const getAllCategories = {
+export const getAllCategories = {
   security: {
     jwt: []
   },
@@ -126,7 +126,8 @@ const getAllCategories = {
     }
   }
 };
-const getCategory = {
+
+export const getCategory = {
   security: {
     jwt: []
   },
@@ -229,7 +230,8 @@ const getCategory = {
     }
   }
 };
-const addCategory = {
+
+export const addCategory = {
   tags: ['Category'],
   description: 'This route allow only admin to add new category',
   opeationId: 'addCategory',
@@ -332,7 +334,8 @@ const addCategory = {
     }
   }
 };
-const updateCategoryDetails = {
+
+export const updateCategoryDetails = {
   tags: ['Category'],
   description:
     'This route allow only admin to update category details [name / description]',
@@ -435,7 +438,8 @@ const updateCategoryDetails = {
     }
   }
 };
-const updateCategoryImage = {
+
+export const updateCategoryImage = {
   tags: ['Category'],
   description: 'This route allow only admin to update category image [image]',
   opeationId: 'updateCategoryImage',
@@ -555,7 +559,8 @@ const updateCategoryImage = {
     }
   }
 };
-const deleteCategory = {
+
+export const deleteCategory = {
   tags: ['Category'],
   description: 'This route allow only admin to delete the category',
   opeationId: 'deleteCategory',
@@ -616,4 +621,3 @@ const deleteCategory = {
     }
   }
 };
-module.exports = { getAllCategories, getCategory, addCategory, updateCategoryDetails, updateCategoryImage, deleteCategory }

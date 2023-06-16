@@ -1,18 +1,22 @@
-const express = require('express');
-const authRoute = require('./auth.route');
-const userRoute = require('./user.route');
-const productRoute = require('./product.route');
-const categoryRoute = require('./category.route');
-const cartRoute = require('./cart.route');
-const orderRoute = require('./order.route');
-const discountRoute = require('./discount.route');
-const favoriteRoute = require('./favorite.route');
-const termsRoute = require('./terms.route');
-const privacy = require('./privacy.route');
-const notify = require('./notify.route');
-const banner = require('./banner_route');
-const support = require('./support');
+import express from 'express';
+
+import authRoute from './auth.route';
+import userRoute from './user.route';
+import productRoute from './product.route';
+import categoryRoute from './category.route';
+import cartRoute from './cart.route';
+import orderRoute from './order.route';
+import discountRoute from './discount.route';
+import favoriteRoute from './favorite.route';
+import termsRoute from './terms.route'
+import privacy from './privacy.route';
+import notify from   './notify.route'
+import banner from './banner_route';
+import support from './support'
+
+
 const router = express.Router();
+
 router.use('/auth', authRoute);
 router.use('/user', userRoute);
 router.use('/product', productRoute);
@@ -22,9 +26,10 @@ router.use('/order', orderRoute);
 router.use('/discount', discountRoute);
 router.use('/favorite', favoriteRoute);
 router.use('/terms', termsRoute)
-router.use('/privacy', privacy)
+router.use('/privacy',privacy )
 router.use('/notify', notify)
 router.use('/banner', banner);
 router.use('/', support)
 
-module.exports = router;
+
+export default router;

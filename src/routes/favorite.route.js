@@ -1,11 +1,11 @@
 // Packages
-const express = require('express');
+import express from 'express';
 
 // Controllers
-const { favoriteController } = require('../controllers');
+import { favoriteController } from '../controllers';
 
 // Middlewares
-const protect = require('../middlewares/protect');
+import protect from '../middlewares/protect';
 
 const {
   addFavoriteProduct,
@@ -27,4 +27,4 @@ router.delete('/:id', protect, deleteProductFromFavorite);
 
 router.get('/check/:id', protect, checkProductInFavoriteList);
 
-module.exports = router;
+export default router;

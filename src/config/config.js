@@ -1,5 +1,7 @@
-const dotenv = require('dotenv');
-const Joi = require('joi');
+import dotenv from 'dotenv';
+import Joi from 'joi';
+
+// import env 
 dotenv.config({ path: 'config.env' });
 
 const envVarsSchema = Joi.object()
@@ -50,8 +52,8 @@ const config = {
     port: envVars.PORT
   },
   db: {
-    url: "mongodb+srv://jaypanda:<password>@jay.uvoxkja.mongodb.net/?retryWrites=true&w=majority",
-    password: "jaypanda"
+    url: envVars.DATABASE_CONNECTION,
+    password: envVars.DATABASE_PASSWORD
   },
   jwt: {
     secret: envVars.JWT_SECRET,
@@ -81,4 +83,4 @@ const config = {
   }
 };
 
-module.exports =config;
+export default config;

@@ -1,11 +1,11 @@
 // Packages
-const express = require('express');
+import express from 'express';
 
 // Middlewares
-const protect = require('../middlewares/protect');
+import protect from '../middlewares/protect';
 
 // Controllers
-const { cartController } = require('../controllers/index');
+import { cartController } from '../controllers/index';
 
 const {
   addItemToCart,
@@ -37,4 +37,4 @@ router.patch('/increase-one', increaseByOne);
 // Delete Product Route
 router.delete('/:productId', deleteItem);
 
-module.exports = router;
+export default router;

@@ -1,4 +1,4 @@
-const getAllOrders = {
+export const getAllOrders = {
   tags: ['Order'],
   description: 'This route allow logged in user/seller/admin get his orders',
   opeationId: 'getAllOrders',
@@ -196,7 +196,7 @@ const getAllOrders = {
   }
 };
 
-const getOrder = {
+export const getOrder = {
   tags: ['Order'],
   description:
     "This route allow logged in user/seller/admin get specific order using it's ID",
@@ -379,7 +379,7 @@ const getOrder = {
   }
 };
 
-const createNewOrder = {
+export const createNewOrder = {
   tags: ['Order'],
   description: 'This route allow logged in user/seller/admin create new order',
   opeationId: 'createNewOrder',
@@ -593,7 +593,7 @@ const createNewOrder = {
   }
 };
 
-const orderStatus = {
+export const orderStatus = {
   tags: ['Order'],
   description: 'This route allow logged in seller update order status',
   opeationId: 'orderStatus',
@@ -706,7 +706,7 @@ const orderStatus = {
   }
 };
 
-const cancelOrder = {
+export const cancelOrder = {
   tags: ['Order'],
   description:
     "This route allow logged in user/seller/admin cancel specific order using it's ID",
@@ -772,4 +772,3 @@ const cancelOrder = {
     }
   }
 };
-module.exports = { getAllOrders, getOrder, createNewOrder, orderStatus, cancelOrder }

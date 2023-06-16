@@ -1,8 +1,8 @@
 // Utils
-const catchAsync = require('../utils/catchAsync');
+import catchAsync from '../utils/catchAsync';
 
 // Services
-const { categoryService } = require('../services/index');
+import { categoryService } from '../services/index';
 
 /**
  * @desc      Get All Categories Data Controller
@@ -14,7 +14,7 @@ const { categoryService } = require('../services/index');
  * @property  { Number } req.query.limit - number of items in page
  * @returns   { JSON } - A JSON object representing the type, message and categories
  */
-const getAllCategories = catchAsync(async (req, res) => {
+export const getAllCategories = catchAsync(async (req, res) => {
   let { page, sort, limit, select } = req.query;
 
   // 1) Setting default params
@@ -50,7 +50,7 @@ const getAllCategories = catchAsync(async (req, res) => {
  * @property  { String } req.params.id - Category ID
  * @returns   { JSON } - A JSON object representing the type, message, and the category
  */
-const getCategory = catchAsync(async (req, res) => {
+export const getCategory = catchAsync(async (req, res) => {
   // 1) Get category using it's ID
   const { type, message, statusCode, category } =
     await categoryService.queryCategory(req.params.id);
@@ -80,9 +80,9 @@ const getCategory = catchAsync(async (req, res) => {
  * @property  { Object } req.file - Category image
  * @returns   { JSON } - A JSON object representing the type, message and the category
  */
-const addCategory = catchAsync(async (req, res) => {
+export const addCategory = catchAsync(async (req, res) => {
   // 1) Create new category
-  const { type, message, statusCode, category, } =
+  const { type, message, statusCode, category,  } =
     await categoryService.createCategory(
       { name: req.body.name, description: req.body.description, userId: req.body.userId },
       req.file
@@ -112,7 +112,7 @@ const addCategory = catchAsync(async (req, res) => {
  * @property  { Object } req.body - Body object data
  * @returns   { JSON } - A JSON object representing the type, message, and the category
  */
-const updateCategoryDetails = catchAsync(async (req, res) => {
+export const updateCategoryDetails = catchAsync(async (req, res) => {
   // 1) Update category details using it's ID
   const { type, message, statusCode, category } =
     await categoryService.updateCategoryDetails(req.params.id, req.body);
@@ -141,7 +141,7 @@ const updateCategoryDetails = catchAsync(async (req, res) => {
  * @property  { Object } req.file - Category image
  * @returns   { JSON } - A JSON object representing the type, message, and the category
  */
-const updateCategoryImage = catchAsync(async (req, res) => {
+export const updateCategoryImage = catchAsync(async (req, res) => {
   // 1) Update category image using it's ID
   const { type, message, statusCode, category } =
     await categoryService.updateCategoryImage(req.params.id, req.file);
@@ -169,7 +169,7 @@ const updateCategoryImage = catchAsync(async (req, res) => {
  * @property  { String } req.params.id - Category ID
  * @returns   { JSON } - A JSON object representing the type and message
  */
-const deleteCategory = catchAsync(async (req, res) => {
+export const deleteCategory = catchAsync(async (req, res) => {
   // 1) Find category using it's ID & delete it
   const { type, message, statusCode } =
     await categoryService.deleteCategoryById(req.params.id);
@@ -188,4 +188,3 @@ const deleteCategory = catchAsync(async (req, res) => {
     message: req.polyglot.t(message)
   });
 });
-module.exports = { addCategory, getCategory, updateCategoryDetails, updateCategoryImage, getAllCategories, deleteCategory }

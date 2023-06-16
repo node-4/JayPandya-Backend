@@ -1,7 +1,7 @@
-const AppError = require('./appError');
+import AppError from './appError';
 
-const config = require('../config/config');
-const logger = require('../config/logger');
+import config from '../config/config';
+import logger from '../config/logger';
 
 // @desc    Function That Handles Invalid JWT Tokens (UNAUTHORIZED)
 const handleJWTError = () =>
@@ -60,7 +60,7 @@ const sendErrorProd = async (err, req, res) => {
   });
 };
 
-const sendErrorProd1 = async(err, req, res, next) => {
+export default (err, req, res, next) => {
   err.statusCode = err.statusCode || 500;
   err.status = err.status || 'error';
 

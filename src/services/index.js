@@ -1,28 +1,134 @@
-const { signin, signup, logout, refreshAuth, resetPassword, verifyEmail, changePassword } = require('./auth.service')
-const { createBanner, getAllBanner, BannerfindId, deleteBannerById, updateBannerDetails, } = require('./banner_service');
-const { AddTerms, getTerms, updateTerms, DeleteTerms } = require('./terms');
-const { createReview, queryReviews, queryReviewById, updateReview, deleteReview } = require('./review.service');
-const { createUser, queryUsers, queryUser, updateUserDetails, updateUserProfileImage, deleteUser, deleteMyAccount } = require('./user.service');
-
-const { createCategory, queryCategories, queryCategory, updateCategoryDetails, updateCategoryImage, deleteCategoryById, getCategryBySelleId } = require('./category.service');
-
-const { queryProducts, queryProductById, createProduct, updateProductDetails, addProductColor, addProductSize, deleteProductColor, deleteProductSize, updateProductMainImage, updateProductImages, deleteProduct, getProductStats, createProductExcel, allProduct } = require('./product.service');
-
-const { addProductToCart, reduceByOne, increaseByOne, queryCart, deleteCart, deleteItem } = require('./cart.service');
-
-const { createOrder, orderStatus, queryOrders, queryOrder, cancelOrder } = require('./order.service');
-
-const { getAllDiscountCodes, getDiscount, verifyDiscountCode, generateDiscountCode, deleteDiscountCode, cancelDiscountCode } = require('./discount.service');
-
-const { addFavoriteProduct, getFavoriteList, deleteProductFromFavorite, checkProductInFavoriteList } = require('./favorite.service');
+import {
+  signin,
+  signup,
+  logout,
+  refreshAuth,
+  resetPassword,
+  verifyEmail,
+  changePassword
+} from './auth.service';
 
 
-const { Addprivacy, getprivacy, updateprivacy, Deleteprivacy } = require('./privacy.service');
+import {
+  createBanner ,
+  getAllBanner,
+  BannerfindId,
+  deleteBannerById,
+  updateBannerDetails,
+  
+} from './banner_service'
 
 
-const { Addnotification, getnotification, updatenotification, Deletenotification } = require('./notification.service');
+import {
+  AddTerms, 
+  getTerms, 
+  updateTerms, 
+  DeleteTerms
+} from './terms'
 
-const authService = { signin, signup, logout, refreshAuth, resetPassword, verifyEmail, changePassword };
+import {
+  createReview,
+  queryReviews,
+  queryReviewById,
+  updateReview,
+  deleteReview
+} from './review.service';
+
+import {
+  createUser,
+  queryUsers,
+  queryUser,
+  updateUserDetails,
+  updateUserProfileImage,
+  deleteUser,
+  deleteMyAccount
+} from './user.service';
+
+import {
+  createCategory,
+  queryCategories,
+  queryCategory,
+  updateCategoryDetails,
+  updateCategoryImage,
+  deleteCategoryById,
+  getCategryBySelleId
+} from './category.service';
+
+import {
+  queryProducts,
+  queryProductById,
+  createProduct,
+  updateProductDetails,
+  addProductColor,
+  addProductSize,
+  deleteProductColor,
+  deleteProductSize,
+  updateProductMainImage,
+  updateProductImages,
+  deleteProduct,
+  getProductStats,
+  createProductExcel,
+  allProduct
+} from './product.service';
+
+import {
+  addProductToCart,
+  reduceByOne,
+  increaseByOne,
+  queryCart,
+  deleteCart,
+  deleteItem
+} from './cart.service';
+
+import {
+  createOrder,
+  orderStatus,
+  queryOrders,
+  queryOrder,
+  cancelOrder
+} from './order.service';
+
+import {
+  getAllDiscountCodes,
+  getDiscount,
+  verifyDiscountCode,
+  generateDiscountCode,
+  deleteDiscountCode,
+  cancelDiscountCode
+} from './discount.service';
+
+import {
+  addFavoriteProduct,
+  getFavoriteList,
+  deleteProductFromFavorite,
+  checkProductInFavoriteList
+} from './favorite.service';
+
+
+import {
+  Addprivacy,
+  getprivacy,
+  updateprivacy,
+  Deleteprivacy
+} from './privacy.service';
+
+
+import {
+  Addnotification,
+  getnotification,
+  updatenotification,
+  Deletenotification
+} from './notification.service'
+
+const authService = {
+  signin,
+  signup,
+  logout,
+  refreshAuth,
+  resetPassword,
+  verifyEmail,
+  changePassword
+};
 
 const reviewService = {
   createReview,
@@ -103,9 +209,9 @@ const favoriteService = {
 };
 
 const termsService = {
-  AddTerms,
-  getTerms,
-  updateTerms,
+  AddTerms, 
+  getTerms, 
+  updateTerms, 
   DeleteTerms
 }
 
@@ -124,14 +230,14 @@ const notifyService = {
 }
 
 const BannerService = {
-  createBanner,
+  createBanner ,
   getAllBanner,
   BannerfindId,
   deleteBannerById,
   updateBannerDetails,
 }
 
-module.exports = {
+export {
   authService,
   userService,
   categoryService,

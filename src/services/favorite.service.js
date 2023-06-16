@@ -1,16 +1,16 @@
 // Utils
-const catchAsync = require('../utils/catchAsync');
-
+import catchAsync from '../utils/catchAsync';
 
 // Models
-const { Favorite, Product } = require('../models');
+import { Favorite, Product } from '../models';
+
 /**
  * @desc    Add product to favorite list service
  * @param   { String } userId - User ID
  * @param   { String } productId - Product ID
  * @returns { Object<type|statusCode|message> }
  */
-const addFavoriteProduct = catchAsync(async (userId, productId) => {
+export const addFavoriteProduct = catchAsync(async (userId, productId) => {
   const product = await Product.findById(productId);
 
   // 1) Check if product doesn't exist
@@ -68,7 +68,7 @@ const addFavoriteProduct = catchAsync(async (userId, productId) => {
  * @param   { String } userId - User ID
  * @returns { Object<type|message|statusCode|favorite> }
  */
-const getFavoriteList = catchAsync(async (userId) => {
+export const getFavoriteList = catchAsync(async (userId) => {
   const favorite = await Favorite.findOne({ user: userId });
 
   // 1) Check if favorite document doesn't exists
@@ -104,7 +104,7 @@ const getFavoriteList = catchAsync(async (userId) => {
  * @param   { String } userId - User ID
  * @returns { Object<type|message|statusCode> }
  */
-const deleteProductFromFavorite = catchAsync(
+export const deleteProductFromFavorite = catchAsync(
   async (userId, productId) => {
     const favorite = await Favorite.findOne({ user: userId });
 
@@ -147,7 +147,7 @@ const deleteProductFromFavorite = catchAsync(
  * @param   { String } userId - User ID
  * @returns { Object<type|message|statusCode> }
  */
-const checkProductInFavoriteList = catchAsync(
+export const checkProductInFavoriteList = catchAsync(
   async (userId, productId) => {
     const favorite = await Favorite.findOne({ user: userId });
 
@@ -177,4 +177,3 @@ const checkProductInFavoriteList = catchAsync(
     };
   }
 );
-module.exports = { addFavoriteProduct, getFavoriteList, deleteProductFromFavorite, checkProductInFavoriteList }

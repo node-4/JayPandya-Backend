@@ -1,4 +1,4 @@
-const {
+import {
   signUp,
   signIn,
   logout,
@@ -6,18 +6,18 @@ const {
   forgotPassword,
   resetPassword,
   changePassword
-} = require('./auth.swagger');
+} from './auth.swagger';
 
-const {
+import {
   getAllCategories,
   getCategory,
   addCategory,
   updateCategoryDetails,
   updateCategoryImage,
   deleteCategory
-} = require('./category.swagger');
+} from './category.swagger';
 
-const {
+import {
   getAllProducts,
   getProduct,
   addProduct,
@@ -32,26 +32,26 @@ const {
   deleteProductColor,
   deleteProductSize,
   getAllProduct
-} = require('./product.swagger');
+} from './product.swagger';
 
-const {
+import {
   getCart,
   addItemsToCart,
   increaseProductQuantityByOne,
   reduceProductQuantityByOne,
   deleteProductFromCart,
   deleteCart
-} = require('./cart.swagger');
+} from './cart.swagger';
 
-const {
+import {
   getAllProductReviews,
   getReview,
   addReview,
   updateReview,
   deleteReview
-} = require('./review.swagger');
+} from './review.swagger';
 
-const {
+import {
   getAllUsers,
   getUser,
   addUser,
@@ -59,31 +59,31 @@ const {
   updateUserProfileImage,
   deleteUser,
   deleteMyAccount
-} = require('./user.swagger');
+} from './user.swagger';
 
-const {
+import {
   createNewOrder,
   getAllOrders,
   getOrder,
   orderStatus,
   cancelOrder
-} = require('./order.swagger');
+} from './order.swagger';
 
-const {
+import {
   addFavoriteProduct,
   deleteProductFromFavorite,
   checkProductInFavoriteList,
   getFavoriteList
-} = require('./favorite.swagger');
+} from './favorite.swagger';
 
-const {
+import {
   verifyDiscountCode,
   getDiscount,
   getAllDiscountCodes,
   generateDiscountCode,
   deleteDiscountCode,
   cancelDiscountCode
-} = require('./discount.swagger');
+} from './discount.swagger';
 
 const docs = {
   openapi: '3.0.3',
@@ -167,7 +167,7 @@ const docs = {
       patch: updateCategoryImage
     },
     '/product': {
-      //  get: getAllProducts,
+    //  get: getAllProducts,
       post: addProduct,
       get: getAllProduct
     },
@@ -264,4 +264,4 @@ const docs = {
   }
 };
 
-module.exports = docs;
+export default docs;

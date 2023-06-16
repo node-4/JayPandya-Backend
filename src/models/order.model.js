@@ -1,6 +1,5 @@
-const mongoose = require('mongoose');
-const toJSON = require('./plugins/index');
-
+import mongoose from 'mongoose';
+import toJSON from './plugins/index';
 
 const orderSchema = mongoose.Schema(
   {
@@ -71,4 +70,4 @@ orderSchema.plugin(toJSON);
 
 const Order = mongoose.model('Order', orderSchema);
 
-module.exports = Order;
+export default Order;

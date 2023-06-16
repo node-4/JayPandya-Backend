@@ -1,13 +1,13 @@
 // Packages
-const nodemailer = require('nodemailer');
-const { google } = require('googleapis');
+import { createTransport } from 'nodemailer';
+import { google } from 'googleapis';
 
 // Configs
-const config = require('../config/config');
+import config from '../config/config';
 
 // Utils
-const catchAsync = require('./catchAsync');
-const AppError = require('./appError');
+import catchAsync from './catchAsync';
+import AppError from './appError';
 
 /**
  * @desc    Send an email
@@ -30,7 +30,7 @@ const sendEmail = catchAsync(async (to, subject, text) => {
     const accessToken = await OAuth2Client.getAccessToken();
 
     // Create the email envelope (transport)
-    const transport = nodemailer.createTransport({
+    const transport = createTransport({
       service: 'gmail',
       auth: {
         type: 'OAuth2',
@@ -63,7 +63,7 @@ const sendEmail = catchAsync(async (to, subject, text) => {
  * @param   { String } token - Reset password token
  * @returns { Promise }
  */
-const sendResetPasswordEmail = catchAsync(async (to, token) => {
+export const sendResetPasswordEmail = catchAsync(async (to, token) => {
   const subject = 'Reset password';
   const resetPasswordUrl = `/reset-password?token=${token}`;
   const text = `Dear user,
@@ -78,7 +78,7 @@ If you did not request any password resets, then ignore this email.`;
  * @param   { String } to - Mail to
  * @returns { Promise }
  */
-const sendAfterResetPasswordMessage = catchAsync(async (to) => {
+export const sendAfterResetPasswordMessage = catchAsync(async (to) => {
   const subject = 'Password Reset Successfully';
   const text = `Your password has successfully been reset.
   Do not hesitate to contact us if you have any questions.`;
@@ -92,7 +92,7 @@ const sendAfterResetPasswordMessage = catchAsync(async (to) => {
  * @param   { String } token - Verify token
  * @returns { Promise }
  */
-const sendVerificationEmail1 = catchAsync(async (to, token) => {
+export const sendVerificationEmail = catchAsync(async (to, token) => {
   const subject = 'Email Verification';
   const verificationEmailUrl = `/verify-email?token=${token}`;
   const text = `Dear user,
@@ -101,4 +101,3 @@ If you did not create an account, then ignore this email.`;
 
   await sendEmail(to, subject, text);
 });
-module.exports = { sendAfterResetPasswordMessage, sendResetPasswordEmail, sendVerificationEmail1 };

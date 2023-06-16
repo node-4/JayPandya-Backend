@@ -1,14 +1,19 @@
-const crypto = require('crypto');
-const catchAsync = require('../utils/catchAsync');
-const APIFeatures = require('../utils/apiFeatures');
-const { User, Discount } = require('../models');
+// Packages
+import crypto from 'crypto';
+
+// Utils
+import catchAsync from '../utils/catchAsync';
+import APIFeatures from '../utils/apiFeatures';
+
+// Models
+import { User, Discount } from '../models';
 
 /**
  * @desc    Get all discount codes
  * @param   { Object } req - Request object
  * @returns { Object<type|message|statusCode|codes> }
  */
-const getAllDiscountCodes = catchAsync(async (req) => {
+export const getAllDiscountCodes = catchAsync(async (req) => {
   const codes = await APIFeatures(req, Discount);
 
   // 1) Check if codes doesn't exist
@@ -34,7 +39,7 @@ const getAllDiscountCodes = catchAsync(async (req) => {
  * @param   { String } code - Discount code
  * @return  { Object<type|message|statusCode|discount> }
  */
-const getDiscount = catchAsync(async (code) => {
+export const getDiscount = catchAsync(async (code) => {
   const discountCode = await Discount.findOne({ code });
 
   // 1) Check if discount code doesn't exist
@@ -61,7 +66,7 @@ const getDiscount = catchAsync(async (code) => {
  * @param   { Object } user - User object data
  * @returns { Object<type|message|statusCode|code> }
  */
-const verifyDiscountCode = catchAsync(async (discountCode, user) => {
+export const verifyDiscountCode = catchAsync(async (discountCode, user) => {
   // 1) Check If User Entered All Fields
   if (!discountCode) {
     return {
@@ -116,7 +121,7 @@ const verifyDiscountCode = catchAsync(async (discountCode, user) => {
  * @param   { Number }  availableEnd - Available codes number end
  * @returns { Object<type|message|statusCode|code> }
  */
-const generateDiscountCode = catchAsync(
+export const generateDiscountCode = catchAsync(
   async (
     codeLength,
     discountStart,
@@ -178,7 +183,7 @@ const generateDiscountCode = catchAsync(
  * @param   { String } codeId - ID of discount code
  * @return  { Object<type|message|statusCode> }
  */
-const deleteDiscountCode = catchAsync(async (codeId) => {
+export const deleteDiscountCode = catchAsync(async (codeId) => {
   const discountCode = await Discount.findById(codeId);
 
   // 1) Check if discount code doesn't exist
@@ -207,7 +212,7 @@ const deleteDiscountCode = catchAsync(async (codeId) => {
  * @param   { String } userId - ID of user
  * @return  { Object<type|message|statusCode> }
  */
-const cancelDiscountCode = catchAsync(async (code, userId) => {
+export const cancelDiscountCode = catchAsync(async (code, userId) => {
   const discountCode = await Discount.findOne({ code });
 
   // 1) Check if discount code doesn't exist
@@ -244,4 +249,3 @@ const cancelDiscountCode = catchAsync(async (code, userId) => {
     statusCode: 200
   };
 });
-module.exports = { getAllDiscountCodes, getDiscount, verifyDiscountCode, generateDiscountCode, deleteDiscountCode, cancelDiscountCode }

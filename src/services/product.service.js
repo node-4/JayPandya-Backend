@@ -1,18 +1,19 @@
 // Utils
-const xlsx = require('xlsx');
-const catchAsync = require('../utils/catchAsync');
-const dataUri = require('../utils/datauri');
-const APIFeatures = require('../utils/apiFeatures');
-const { uploadFile, destroyFile } = require('../utils/cloudinary');
+import xlsx from 'xlsx'
+import catchAsync from '../utils/catchAsync';
+import dataUri from '../utils/datauri';
+import APIFeatures from '../utils/apiFeatures';
+import { uploadFile, destroyFile } from '../utils/cloudinary';
+
 // Model
-const { Product, Color, Size } = require('../models/index');
+import { Product, Color, Size } from '../models/index';
 
 /**
  * @desc    Query products
  * @param   { Object } req - Request object
  * @returns { Object<type|message|statusCode|products> }
  */
- const queryProducts = catchAsync(async (req) => {
+export const queryProducts = catchAsync(async (req) => {
   const populateQuery = [
     { path: 'colors', select: 'color' },
     { path: 'sizes', select: 'size' }
@@ -43,7 +44,7 @@ const { Product, Color, Size } = require('../models/index');
  * @param   { String } productId - Product ID
  * @returns { Object<type|message|statusCode|product> }
  */
- const queryProductById = catchAsync(async (productId) => {
+export const queryProductById = catchAsync(async (productId) => {
   // const populateQuery = [
   //   { path: 'colors', select: 'color' },
   //   { path: 'sizes', select: 'size' }
@@ -71,9 +72,9 @@ const { Product, Color, Size } = require('../models/index');
   };
 });
 
- const allProduct = catchAsync(async () => {
+export const  allProduct = catchAsync(async() => {
   const ProducData = await Product.find().limit().populate('userId')
-  if (ProducData.length === 0) {
+  if(ProducData.length ===0){
     return {
       type: "Error",
       message: "No Data Found",
@@ -90,6 +91,7 @@ const { Product, Color, Size } = require('../models/index');
   }
 
 })
+
 /**
  * @desc    Create new product
  * @param   { Object } body - Body object data
@@ -97,7 +99,7 @@ const { Product, Color, Size } = require('../models/index');
  * @param   { String } seller - Product seller ID
  * @returns { Object<type|message|statusCode|product> }
  */
- const createProduct = catchAsync(async (body, files, seller) => {
+export const createProduct = catchAsync(async (body, files, seller) => {
   const {
     id,
     asin,
@@ -151,7 +153,7 @@ const { Product, Color, Size } = require('../models/index');
   // const imagesPromises = image_url.map((image) =>
   // console.log(image)
   //  // uploadFile(dataUri(image).content, folderName)
-
+   
   // );
   // // const folderName = `Products/${product_name.trim().split(' ').join('')}`;
   // // const imagesResult = await Promise.all(imagesPromises);
@@ -182,9 +184,9 @@ const { Product, Color, Size } = require('../models/index');
     id,
     asin,
     mainImage,
-    bullet_text,
+    bullet_text ,
     image_url: images,
-    // imagesId,
+   // imagesId,
     colors,
     sizes,
     product_name,
@@ -266,9 +268,9 @@ const { Product, Color, Size } = require('../models/index');
  * @param   { String } sellerId - Seller ID
  * @returns { Object<type|message|statusCode|product> }
  */
- const updateProductDetails = catchAsync(
+export const updateProductDetails = catchAsync(
   async (productId, sellerId, body) => {
-    const product = await Product.findById({ _id: productId });
+    const product = await Product.findById({_id: productId});
 
     // 1) Check if product doesn't exist
     if (!product) {
@@ -298,7 +300,7 @@ const { Product, Color, Size } = require('../models/index');
     // }
 
     // 3) Update product by it's ID
-    const result = await Product.updateOne({ _id: productId }, body, {
+    const result = await Product.updateOne({_id: productId}, body, {
       new: true,
       runValidators: true
     });
@@ -320,7 +322,7 @@ const { Product, Color, Size } = require('../models/index');
  * @param   { String } color - Product color
  * @returns { Object<type|message|statusCode|color> }
  */
- const addProductColor = catchAsync(
+export const addProductColor = catchAsync(
   async (productId, sellerId, color) => {
     const product = await Product.findById(productId);
 
@@ -377,7 +379,7 @@ const { Product, Color, Size } = require('../models/index');
  * @param   { String } size - Product size
  * @returns { Object<type|message|statusCode|size> }
  */
- const addProductSize = catchAsync(async (productId, sellerId, size) => {
+export const addProductSize = catchAsync(async (productId, sellerId, size) => {
   const product = await Product.findById(productId);
 
   // 1) Check if product doesn't exist
@@ -432,7 +434,7 @@ const { Product, Color, Size } = require('../models/index');
  * @param   { String } color - Product color
  * @returns { Object<type|message|statusCode> }
  */
- const deleteProductColor = catchAsync(
+export const deleteProductColor = catchAsync(
   async (productId, sellerId, color) => {
     const product = await Product.findById(productId);
 
@@ -490,7 +492,7 @@ const { Product, Color, Size } = require('../models/index');
  * @param   { String } size - Product size
  * @returns { Object<type|message|statusCode> }
  */
- const deleteProductSize = catchAsync(
+export const deleteProductSize = catchAsync(
   async (productId, sellerId, size) => {
     const product = await Product.findById(productId);
 
@@ -546,7 +548,7 @@ const { Product, Color, Size } = require('../models/index');
  * @param   { Object } image - Product main image
  * @returns { Object<type|message|statusCode|product> }
  */
- const updateProductMainImage = catchAsync(
+export const updateProductMainImage = catchAsync(
   async (productId, sellerId, image) => {
     // 1) Check if image provided
     if (image.length === 0) {
@@ -619,7 +621,7 @@ const { Product, Color, Size } = require('../models/index');
  * @param   { Object } images - Product images
  * @returns { Object<type|message|statusCode|product> }
  */
- const updateProductImages = catchAsync(
+export const updateProductImages = catchAsync(
   async (productId, sellerId, images) => {
     // 1) Check if images provided
     if (images.length === 0) {
@@ -699,7 +701,7 @@ const { Product, Color, Size } = require('../models/index');
  * @param   { String } sellerId - Seller ID
  * @returns { Object<type|message|statusCode> }
  */
- const deleteProduct = catchAsync(async (productId, sellerId) => {
+export const deleteProduct = catchAsync(async (productId, sellerId) => {
   const product = await Product.findById(productId);
 
   // 1) Check if product doesn't exist
@@ -735,7 +737,7 @@ const { Product, Color, Size } = require('../models/index');
  * @desc    Get Products Statics
  * @return  { Array<Stats> }
  */
- const getProductStats = catchAsync(async () => {
+export const getProductStats = catchAsync(async () => {
   const stats = await Product.aggregate([
     {
       $match: { ratingsAverage: { $gte: 4.5 } }
@@ -786,47 +788,46 @@ const { Product, Color, Size } = require('../models/index');
   return stats;
 });
 
- const createProductExcel = catchAsync(async (fileName) => {
-  try {
-    const workbook = xlsx.readFile('upload\\DataSample_TGG_Products.xlsx');
-    const sheet_name_list = workbook.SheetNames;
-    const data = xlsx.utils.sheet_to_json(workbook.Sheets[sheet_name_list[0]]);
-    for (let product of data) {
-      const imageKeys = Object.keys(product).filter(key => key.startsWith('Image'));
-      const bulletKeys = Object.keys(product).filter(key => key.startsWith('Bullet'));
-      const imageValues = imageKeys.map(key => product[key]);
-      const bulletValues = bulletKeys.map(key => product[key]);
-      let productData = await Product.create({
-        id: product.Id,
-        asin: product.ASIN,
-        product_name: product.ProductName,
-        description: product.Description,
-        brand: product.Brand,
-        color: product.Color,
-        image_url: imageValues,
-        bullet_text: bulletValues,
-        shipping_weight: product.ShippingWeight,
-        shipping_weight_unit: product.ShippingWeightUnit,
-        manufacturer: product.Manufacturer,
-        model: product.Model
+export const createProductExcel  = catchAsync(async(fileName) => {
+  try{
+  const workbook = xlsx.readFile('upload\\DataSample_TGG_Products.xlsx');
+  const sheet_name_list = workbook.SheetNames;
+  const data = xlsx.utils.sheet_to_json(workbook.Sheets[sheet_name_list[0]]);
+  for(let product of data ){
+    const imageKeys = Object.keys(product).filter(key => key.startsWith('Image'));
+    const bulletKeys = Object.keys(product).filter(key => key.startsWith('Bullet'));
+    const imageValues = imageKeys.map(key => product[key]);
+    const bulletValues = bulletKeys.map(key => product[key]);
+    let productData = await Product.create({
+      id: product.Id,
+      asin: product.ASIN,
+      product_name: product.ProductName,
+      description: product.Description, 
+      brand: product.Brand, 
+      color: product.Color,
+       image_url : imageValues,
+       bullet_text: bulletValues,
+      shipping_weight: product.ShippingWeight,
+      shipping_weight_unit: product.ShippingWeightUnit,
+      manufacturer: product.Manufacturer,
+      model: product.Model
 
-      })
-    }
-    return {
-      type: "success",
-      message: "Product is Added ",
-      result: productData,
-      statusCode: 200
-    }
-  } catch (err) {
+    })
+  }
+  return {
+    type: "success",
+    message: "Product is Added ",
+    result: productData,
+    statusCode: 200
+  }
+  }catch(err){
     console.log(err)
     return {
       type: "Error",
       message: err.message,
       statusCode: 400
     }
-
+    
   }
 })
 
-module.exports = { allProduct, queryProductById, queryProducts, createProduct, updateProductDetails, addProductColor, addProductSize, deleteProductColor, deleteProductSize, updateProductMainImage, updateProductImages, deleteProduct, getProductStats, createProductExcel }

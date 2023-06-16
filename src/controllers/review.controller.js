@@ -1,8 +1,8 @@
 // Utils
-const catchAsync = require('../utils/catchAsync');
+import catchAsync from '../utils/catchAsync';
 
 // Services
-const { reviewService } = require('../services/index');
+import { reviewService } from '../services/index';
 
 /**
  * @desc      Create New Review Controller
@@ -13,7 +13,7 @@ const { reviewService } = require('../services/index');
  * @property  { Object } req.body - Body object data
  * @returns   { JSON } - A JSON object representing the type, message and the review
  */
-const addReview = catchAsync(async (req, res) => {
+export const addReview = catchAsync(async (req, res) => {
   // 1) Create new review
   const { type, message, statusCode, review } =
     await reviewService.createReview(
@@ -48,7 +48,7 @@ const addReview = catchAsync(async (req, res) => {
  * @property  { Number } req.query.limit - Maximum number of reviews on page
  * @return    { JSON } - A JSON object representing the type, message and the reviews
  */
-const getAllReviews = catchAsync(async (req, res) => {
+export const getAllReviews = catchAsync(async (req, res) => {
   let { page, sort, limit, select } = req.query;
 
   // 1) Setting default params
@@ -85,7 +85,7 @@ const getAllReviews = catchAsync(async (req, res) => {
  * @property  { String } req.params.reviewId - Review ID
  * @return    { JSON } - A JSON object representing the type, message and the review
  */
-const getReview = catchAsync(async (req, res) => {
+export const getReview = catchAsync(async (req, res) => {
   const { productId, reviewId } = req.params;
 
   // 1) Get review using it's ID
@@ -118,7 +118,7 @@ const getReview = catchAsync(async (req, res) => {
  * @property  { Object } req.body - Body object data
  * @return    { JSON } - A JSON object representing the type, message and the review
  */
-const updateReview = catchAsync(async (req, res) => {
+export const updateReview = catchAsync(async (req, res) => {
   const { productId, reviewId } = req.params;
 
   // 1) Update review using it's ID
@@ -155,7 +155,7 @@ const updateReview = catchAsync(async (req, res) => {
  * @property  { String } req.user.id - User ID
  * @return    { JSON } - A JSON object representing the type and message
  */
-const deleteReview = catchAsync(async (req, res) => {
+export const deleteReview = catchAsync(async (req, res) => {
   const { productId, reviewId } = req.params;
 
   // 1) Delete review using it's ID
@@ -179,5 +179,3 @@ const deleteReview = catchAsync(async (req, res) => {
     message: req.polyglot.t(message)
   });
 });
-
-module.exports = { addReview, getAllReviews, getReview, updateReview, deleteReview }

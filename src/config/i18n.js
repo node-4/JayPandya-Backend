@@ -1,6 +1,6 @@
-const availableLangs = ['ar', 'en'];
+export const availableLangs = ['ar', 'en'];
 
-const messages = {
+export const messages = {
   en: {
     profileImageRequired: 'Profile image ss required, please upload an image!',
     fieldsRequired: 'All fields are required.',
@@ -243,4 +243,3 @@ const messages = {
     successfulGetDiscount: 'تم العثور علي الخصم بنجاح.'
   }
 };
-module.exports = { messages, availableLangs };

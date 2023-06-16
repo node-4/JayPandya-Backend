@@ -1,18 +1,37 @@
-const User = require('./user.model');
-const Product = require('./product.model');
-const Category = require('./category.model');
-const Review = require('./review.model');
-const Cart = require('./cart.model');
-const Order = require('./order.model');
-const Token = require('./token.model');
-const Discount = require('./discount.model');
-const Favorite = require('./favorite.model');
-const Color = require('./color.model');
-const Size = require('./size.model');
-const Terms = require('./terms_model')
-const Privacy = require('./privacy_model')
-const Notify = require('./notification.model')
-const Banner = require('./banner_model');
-const Support = require('./support_model');
-const Help = require('./helpandSupport')
-module.exports = { User, Product, Category, Review, Cart, Order, Token, Discount, Favorite, Color, Size, Terms, Privacy, Notify, Banner, Help, Support };
+import User from './user.model';
+import Product from './product.model';
+import Category from './category.model';
+import Review from './review.model';
+import Cart from './cart.model';
+import Order from './order.model';
+import Token from './token.model';
+import Discount from './discount.model';
+import Favorite from './favorite.model';
+import Color from './color.model';
+import Size from './size.model';
+import Terms from './terms_model'
+import Privacy from './privacy_model'
+import Notify from './notification.model'
+import Banner from './banner_model';
+import Support from './support_model';
+import Help from './helpandSupport'
+
+export {
+  User,
+  Product,
+  Category,
+  Review,
+  Cart,
+  Order,
+  Token,
+  Discount,
+  Favorite,
+  Color,
+  Size,
+  Terms,
+  Privacy,
+  Notify,
+  Banner,
+  Help,
+  Support
+};

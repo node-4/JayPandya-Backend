@@ -1,18 +1,24 @@
-const tokenTypes = require('../config/tokens');
+// Configs
+import tokenTypes from '../config/tokens';
 
-const catchAsync = require('../utils/catchAsync');
-
-const dataUri = require('../utils/datauri');
-
-const uploadFile = require('../utils/cloudinary');
-
-const { sendVerificationEmail, sendAfterResetPasswordMessage } = require('../utils/sendEmail');
+// Utils
+import catchAsync from '../utils/catchAsync';
+import dataUri from '../utils/datauri';
+import { uploadFile } from '../utils/cloudinary';
+import {
+  sendVerificationEmail,
+  sendAfterResetPasswordMessage
+} from '../utils/sendEmail';
 
 // Middlewares
-const {verifyToken,generateAuthTokens,generateVerifyEmailToken} = require('../middlewares/token');
+import {
+  verifyToken,
+  generateAuthTokens,
+  generateVerifyEmailToken
+} from '../middlewares/token';
 
 // Models
-const { User, Token } = require('../models/index');
+import { User, Token } from '../models/index';
 
 /**
  * @desc    Sign Up Service
@@ -20,7 +26,7 @@ const { User, Token } = require('../models/index');
  * @param   { Object } profileImage - User profile image
  * @return  { Object<type|statusCode|message|user|tokens> }
  */
-const signup = catchAsync(async (body, profileImage) => {
+export const signup = catchAsync(async (body, profileImage) => {
   // 1) Check if profile image not provided
   // if (profileImage === undefined) {
   //   return {
@@ -31,8 +37,8 @@ const signup = catchAsync(async (body, profileImage) => {
   // }
 
   const { name, username, email, password, passwordConfirmation, role } = body;
-  let { companyName, address, phone, } = body;
-  console.log(role)
+  let { companyName, address, phone,  } = body;
+console.log(role)
   // 2) Check all fields
   if (!companyName) companyName = '';
   if (!address) address = '';
@@ -44,7 +50,7 @@ const signup = catchAsync(async (body, profileImage) => {
     !email ||
     !password ||
     !passwordConfirmation ||
-    !role
+    !role 
     //profileImage.length === 0
   ) {
     return {
@@ -136,7 +142,7 @@ const signup = catchAsync(async (body, profileImage) => {
  * @param   { String } password - User password
  * @return  { Object<type|statusCode|message|user|tokens> }
  */
-const signin = catchAsync(async (email, password) => {
+export const signin = catchAsync(async (email, password) => {
   // 1) Check if email and password exist
   if (!email || !password) {
     return {
@@ -184,7 +190,7 @@ const signin = catchAsync(async (email, password) => {
  * @param   { String } refreshToken - User's refresh token
  * @return  { Object }
  */
-const logout = catchAsync(async (refreshToken) => {
+export const logout = catchAsync(async (refreshToken) => {
   // 1) Find token document and delete it
   const refreshTokenDoc = await Token.findOneAndDelete({
     token: refreshToken,
@@ -213,7 +219,7 @@ const logout = catchAsync(async (refreshToken) => {
  * @param   { String } refreshToken - User's refresh token
  * @return  { Object<type|statusCode|message|tokens> }
  */
-const refreshAuth = catchAsync(async (refreshToken) => {
+export const refreshAuth = catchAsync(async (refreshToken) => {
   // 1) Verify refresh token
   const refreshTokenDoc = await verifyToken(refreshToken, tokenTypes.REFRESH);
 
@@ -257,7 +263,7 @@ const refreshAuth = catchAsync(async (refreshToken) => {
  * @param   { String } userId - User ID
  * @return  { Object<type|statusCode|message> }
  */
-const changePassword = catchAsync(
+export const changePassword = catchAsync(
   async (currentPassword, password, passwordConfirmation, userId) => {
     // 1) Check if password and passwordConfirmation are not the same
     if (password !== passwordConfirmation) {
@@ -303,7 +309,7 @@ const changePassword = catchAsync(
  * @param   { String } passwordConfirmation - User's password confirmation
  * @return  { Object<type|statusCode|message> }
  */
-const resetPassword = catchAsync(
+export const resetPassword = catchAsync(
   async (token, password, passwordConfirmation) => {
     // 1) Check if password and passwordConfirmation are not the same
     if (password !== passwordConfirmation) {
@@ -367,7 +373,7 @@ const resetPassword = catchAsync(
  * @param   { String } verifyEmailToken - Email verification token
  * @returns { Object<type|statusCode|message> }
  */
-const verifyEmail = catchAsync(async (verifyEmailToken) => {
+export const verifyEmail = catchAsync(async (verifyEmailToken) => {
   // 1) Verify email token
   const verifyEmailTokenDoc = await verifyToken(
     verifyEmailToken,
@@ -398,4 +404,3 @@ const verifyEmail = catchAsync(async (verifyEmailToken) => {
     message: 'successfulEmailVerification'
   };
 });
-module.exports = { signup, signin, logout, refreshAuth, resetPassword, changePassword, verifyEmail }

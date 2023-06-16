@@ -1,9 +1,8 @@
 // Packages
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 // Plugins
-const toJSON = require('./plugins/index');
-
+import toJSON from './plugins/index';
 
 const favoriteSchema = mongoose.Schema(
   {
@@ -30,4 +29,4 @@ favoriteSchema.plugin(toJSON);
 
 const Favorite = mongoose.model('Favorite', favoriteSchema);
 
-module.exports = Favorite;
+export default Favorite;

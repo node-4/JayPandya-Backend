@@ -1,5 +1,9 @@
-const catchAsync = require('../utils/catchAsync');
-const { cartService } = require('../services/index');
+// Utils
+import catchAsync from '../utils/catchAsync';
+
+// Services
+import { cartService } from '../services/index';
+
 /**
  * @desc      Add Product To Cart Controller
  * @param     { Object } req - Request object
@@ -11,7 +15,7 @@ const { cartService } = require('../services/index');
  * @property  { String } req.body.selectedSize - Selected size
  * @returns   { JSON } - A JSON object representing the type, message, and the cart
  */
-const addItemToCart = catchAsync(async (req, res) => {
+export const addItemToCart = catchAsync(async (req, res) => {
   const { productId, quantity, selectedColor, selectedSize } = req.body;
   console.log(productId)
   // 1) Add product to cart
@@ -50,7 +54,7 @@ const addItemToCart = catchAsync(async (req, res) => {
  * @property  { String } req.body.selectedSize - Selected size
  * @returns   { JSON } - A JSON object representing the type, message, and the cart
  */
-const reduceByOne = catchAsync(async (req, res) => {
+export const reduceByOne = catchAsync(async (req, res) => {
   const { productId, selectedColor, selectedSize } = req.body;
 
   // 1) Reduce product quantity by one from cart
@@ -87,7 +91,7 @@ const reduceByOne = catchAsync(async (req, res) => {
  * @property  { String } req.body.selectedSize - Selected size
  * @returns   { JSON } - A JSON object representing the type, message, and the cart
  */
-const increaseByOne = catchAsync(async (req, res) => {
+export const increaseByOne = catchAsync(async (req, res) => {
   const { productId, selectedColor, selectedSize } = req.body;
 
   // 1) Increase product by one
@@ -121,7 +125,7 @@ const increaseByOne = catchAsync(async (req, res) => {
  * @property  { String } req.user.email - User email address
  * @returns   { JSON } - A JSON object representing the type, message, and the cart
  */
-const getCart = catchAsync(async (req, res) => {
+export const getCart = catchAsync(async (req, res) => {
   // 1) Get cart using user email
   const { type, message, statusCode, cart } = await cartService.queryCart(
     req.user.email
@@ -150,7 +154,7 @@ const getCart = catchAsync(async (req, res) => {
  * @property  { String } req.user.email - User email address
  * @returns   { JSON } - A JSON object representing the type and message
  */
-const deleteCart = catchAsync(async (req, res) => {
+export const deleteCart = catchAsync(async (req, res) => {
   // 1) Delete cart using user email
   const { type, message, statusCode } = await cartService.deleteCart(
     req.user.email
@@ -181,7 +185,7 @@ const deleteCart = catchAsync(async (req, res) => {
  * @property  { String } req.body.selectedSize - Selected size
  * @returns   { JSON } - A JSON object representing the type, message and the cart
  */
-const deleteItem = catchAsync(async (req, res) => {
+export const deleteItem = catchAsync(async (req, res) => {
   const { selectedColor, selectedSize } = req.body;
 
   // 1) Delete product from cart
@@ -207,4 +211,3 @@ const deleteItem = catchAsync(async (req, res) => {
     cart
   });
 });
-module.exports = { getCart, reduceByOne, increaseByOne, addItemToCart, deleteCart, deleteItem }

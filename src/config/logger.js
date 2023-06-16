@@ -1,4 +1,4 @@
-const winston = require('winston');
+import winston from 'winston';
 
 const enumerateErrorFormat = winston.format((info) => {
   if (info instanceof Error) {
@@ -22,4 +22,4 @@ const logger = winston.createLogger({
   ]
 });
 
-module.exports =logger;
+export default logger;

@@ -1,4 +1,4 @@
-const signUp = {
+export const signUp = {
   security: {
     jwt: []
   },
@@ -215,7 +215,7 @@ const signUp = {
   }
 };
 
-const signIn = {
+export const signIn = {
   security: {
     jwt: []
   },
@@ -388,7 +388,7 @@ const signIn = {
   }
 };
 
-const logout = {
+export const logout = {
   security: {
     jwt: []
   },
@@ -463,7 +463,7 @@ const logout = {
   }
 };
 
-const generateTokens = {
+export const generateTokens = {
   security: {
     jwt: []
   },
@@ -559,7 +559,7 @@ const generateTokens = {
   }
 };
 
-const forgotPassword = {
+export const forgotPassword = {
   security: {
     jwt: []
   },
@@ -616,7 +616,7 @@ const forgotPassword = {
   }
 };
 
-const resetPassword = {
+export const resetPassword = {
   security: {
     jwt: []
   },
@@ -702,7 +702,7 @@ const resetPassword = {
   }
 };
 
-const changePassword = {
+export const changePassword = {
   tags: ['Auth'],
   description: 'This route allow you to user to change his password',
   opeationId: 'changePassword',
@@ -786,4 +786,3 @@ const changePassword = {
     }
   }
 };
-module.exports = { signUp, signIn, logout, generateTokens, forgotPassword, resetPassword, changePassword };

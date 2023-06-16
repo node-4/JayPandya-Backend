@@ -1,12 +1,12 @@
 // Packages
-const express = require('express');
+import express from 'express';
 
 // Controllers
-const { orderController } = require('../controllers/index');
+import { orderController } from '../controllers/index';
 
 // Middlewares
-const protect = require('../middlewares/protect');
-const restrictedTo = require('../middlewares/restrictedTo');
+import protect from '../middlewares/protect';
+import restrictedTo from '../middlewares/restrictedTo';
 
 const { createOrder, orderStatus, getAllOrders, getOrder, cancelOrder } =
   orderController;
@@ -29,4 +29,4 @@ router.route('/:id').get(getOrder).delete(cancelOrder);
 // Update Order Status
 router.patch('/:id', restrictedTo('admin'), orderStatus);
 
-module.exports = router;
+export default router;

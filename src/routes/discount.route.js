@@ -1,12 +1,12 @@
 // Packages
-const express = require('express');
+import express from 'express';
 
 // Controllers
-const { discountController } = require('../controllers');
+import { discountController } from '../controllers';
 
 // Middlewares
-const protect = require('../middlewares/protect');
-const restrictedTo = require('../middlewares/restrictedTo');
+import protect from '../middlewares/protect';
+import restrictedTo from '../middlewares/restrictedTo';
 
 const {
   getAllDiscountCodes,
@@ -35,7 +35,7 @@ router.post('/generate', generateDiscountCode);
 
 router.delete('/:id', deleteDiscountCode);
 
-module.exports = router;
+export default router;
 
 
 

@@ -1,15 +1,14 @@
 // Packages
-const express = require('express');
+import express from 'express';
 
 // Middlewares
-const protect = require('../middlewares/protect');
+import protect from '../middlewares/protect';
 
 // Controllers
-const { bannerController } = require('../controllers/index');
+import { bannerController } from '../controllers/index';
 
 // Utils
-const { singleFile } = require('../utils/multer');
-
+import { singleFile } from '../utils/multer';
 
 const {
     addBanner,
@@ -25,7 +24,7 @@ const router = express.Router();
 router.get('/', getAllBanners);
 
 // Get Category Route
-router.get('/:id', BannerGetByID);
+router.get('/:id',BannerGetByID);
 
 // Protect All Next Routes
 //router.use(protect.);
@@ -42,4 +41,4 @@ router.route('/:id').delete(DeleteBanner);
 
 
 
-module.exports = router;
+export default router;

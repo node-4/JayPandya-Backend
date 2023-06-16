@@ -1,5 +1,5 @@
-const cloudinary = require('cloudinary');
-const config = require('../config/config');
+import cloudinary from 'cloudinary';
+import config from '../config/config';
 
 // Setting The Cloudinary Configurations
 cloudinary.v2.config({
@@ -8,15 +8,15 @@ cloudinary.v2.config({
   api_secret: config.cloud.api_secret
 });
 
-const destroyFile = (PublicID) =>
+export const destroyFile = (PublicID) =>
   cloudinary.v2.uploader.destroy(PublicID, (err, des) => des);
-const uploadFile = (file, folderName, width) =>
-  //console.log(folderName)
-  //console.log("Cloud", file)
+
+export const uploadFile = (file, folderName, width) =>
+//console.log(folderName)
+//console.log("Cloud", file)
   cloudinary.v2.uploader.upload(file, {
     folder: `${config.cloud.project}/${folderName}`,
     width: width,
     crop: 'fit',
     format: 'webp'
   });
-module.exports = { destroyFile, uploadFile };

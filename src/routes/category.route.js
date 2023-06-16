@@ -1,15 +1,14 @@
 // Packages
-const express = require('express');
+import express from 'express';
 
 // Middlewares
-const protect = require('../middlewares/protect');
+import protect from '../middlewares/protect';
 
 // Controllers
-const { categoryController } = require('../controllers/index');
+import { categoryController } from '../controllers/index';
 
 // Utils
-const { singleFile } = require('../utils/multer');
-
+import { singleFile } from '../utils/multer';
 
 const {
   getAllCategories,
@@ -42,4 +41,4 @@ router.route('/:id').patch(updateCategoryDetails).delete(deleteCategory);
 // Update Category Image (Multer Middleware) Route
 router.patch('/:id/image', singleFile('image'), updateCategoryImage);
 
-module.exports = router;
+export default router;

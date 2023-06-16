@@ -1,19 +1,19 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const supportSchema = mongoose.Schema({
-  email: {
-    type: String,
-  },
-  mobile: {
+    email: {
+        type: String, 
+    },
+    mobile: {
+        type: Number,
+        default: 0
+    }, 
+  whatpapp : {
     type: Number,
-    default: 0
-  },
-  whatpapp: {
-    type: Number,
-    default: 0
+    default:0
   }
 })
 
-const Support = mongoose.model('supportSchema', supportSchema);
+const Support  = mongoose.model('supportSchema', supportSchema);
 
-module.exports = Support
+export default Support

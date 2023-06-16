@@ -1,15 +1,19 @@
-const catchAsync = require('../utils/catchAsync');
-const APIFeatures = require('../utils/apiFeatures');
-const dataUri = require('../utils/datauri');
-const { uploadFile, destroyFile } = require('../utils/cloudinary');
-const { Category } = require('../models/index');
+// Utils
+import catchAsync from '../utils/catchAsync';
+import APIFeatures from '../utils/apiFeatures';
+import dataUri from '../utils/datauri';
+import { uploadFile, destroyFile } from '../utils/cloudinary';
+
+// Models
+import { Category } from '../models/index';
+
 /**
  * @desc    Create New Category
  * @param   { Object } body - Body object data
  * @param   { Object } file - Category image
  * @returns { Object<type|message|statusCode|category> }
  */
-const createCategory = catchAsync(async (body, file) => {
+export const createCategory = catchAsync(async (body, file) => {
   const { name, description, userId } = body;
 
   // 1) Check if the user entered all fields
@@ -28,7 +32,7 @@ const createCategory = catchAsync(async (body, file) => {
   let image = dataUri(file);
 
   // 4) Upload image to cloudinary
-  image = await uploadFile(folderName, 600);
+  image = await uploadFile( folderName, 600);
 
   // 5) Create body
   const object = {
@@ -56,7 +60,7 @@ const createCategory = catchAsync(async (body, file) => {
  * @param   { Object } req - Request object
  * @returns { Object<type|message|statusCode|categories> }
  */
-const queryCategories = catchAsync(async (req) => {
+export const queryCategories = catchAsync(async (req) => {
   // 1) Get all categories
   const categories = await Category.find().populate('userId').lean()
 
@@ -82,7 +86,7 @@ const queryCategories = catchAsync(async (req) => {
  * @param   { String } id - Category ID
  * @returns { Object<type|message|statusCode|category> }
  */
-const queryCategory = catchAsync(async (id) => {
+export const queryCategory = catchAsync(async (id) => {
   console.log("UII")
   const category = await Category.find().populate('userId').lean()
 
@@ -110,7 +114,7 @@ const queryCategory = catchAsync(async (id) => {
  * @param   { Object } body - Category details
  * @returns { Object<type|message|statusCode|category> }
  */
-const updateCategoryDetails = catchAsync(async (id, body) => {
+export const updateCategoryDetails = catchAsync(async (id, body) => {
   let category = await Category.findById(id);
 
   // 1) Check if category doesn't exist
@@ -143,7 +147,7 @@ const updateCategoryDetails = catchAsync(async (id, body) => {
  * @param   { Object } image - Category image
  * @returns { Object<type|message|statusCode|category> }
  */
-const updateCategoryImage = catchAsync(async (id, image) => {
+export const updateCategoryImage = catchAsync(async (id, image) => {
   // 1) Check if image provided
   if (image === undefined) {
     return {
@@ -193,13 +197,13 @@ const updateCategoryImage = catchAsync(async (id, image) => {
   };
 });
 
-const getCategryBySelleId = catchAsync(async (userId) => {
-  const category = await Category.find({ userId: userId });
-  if (category.length === 0) {
+export const getCategryBySelleId = catchAsync(async(userId) => {
+  const category = await Category.find({userId:userId });
+  if(category.length === 0){
     return {
-      type: 'Error',
-      message: 'noCategoryFound',
-      statusCode: 404
+        type: 'Error',
+        message: 'noCategoryFound',
+        statusCode: 404
     }
   }
   return {
@@ -215,7 +219,7 @@ const getCategryBySelleId = catchAsync(async (userId) => {
  * @param   { String } id - Category ID
  * @returns { Object<type|message|statusCode> }
  */
-const deleteCategoryById = catchAsync(async (id) => {
+export const deleteCategoryById = catchAsync(async (id) => {
   const category = await Category.findById(id);
 
   // 1) Check if category doesn't exist
@@ -241,5 +245,5 @@ const deleteCategoryById = catchAsync(async (id) => {
   };
 });
 
-module.exports = { createCategory, queryCategories, queryCategory, updateCategoryDetails, updateCategoryImage, getCategryBySelleId, deleteCategoryById }
+
 

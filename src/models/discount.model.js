@@ -1,6 +1,5 @@
-const mongoose = require('mongoose');
-const toJSON = require('./plugins/index');
-
+import mongoose from 'mongoose';
+import toJSON from './plugins/index';
 
 const discountSchema = mongoose.Schema(
   {
@@ -28,4 +27,4 @@ discountSchema.plugin(toJSON);
 
 const Discount = mongoose.model('Discount', discountSchema);
 
-module.exports = Discount;
+export default Discount;

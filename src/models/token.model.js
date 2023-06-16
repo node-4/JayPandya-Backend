@@ -1,6 +1,5 @@
-const mongoose = require('mongoose');
-const toJSON = require('./plugins/index');
-
+import mongoose from 'mongoose';
+import toJSON from './plugins/index';
 
 const tokenSchema = mongoose.Schema(
   {
@@ -32,4 +31,4 @@ tokenSchema.plugin(toJSON);
  */
 const Token = mongoose.model('Token', tokenSchema);
 
-module.exports = Token;
+export default Token;

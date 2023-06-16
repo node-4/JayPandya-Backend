@@ -1,8 +1,8 @@
 // Utils
-const catchAsync = require('../utils/catchAsync');
+import catchAsync from '../utils/catchAsync';
 
 // Services
-const { favoriteService } = require('../services');
+import { favoriteService } from '../services';
 
 /**
  * @desc      Get product's favorite list controller
@@ -11,7 +11,7 @@ const { favoriteService } = require('../services');
  * @property  { String }  req.user.id - User ID
  * @returns   { JSON } - A JSON object representing the type, message and the favorite list
  */
-const getFavoriteList = catchAsync(async (req, res) => {
+export const getFavoriteList = catchAsync(async (req, res) => {
   // 1) Calling addFavoriteProduct service
   const { type, message, statusCode, favorite } =
     await favoriteService.getFavoriteList(req.user.id);
@@ -40,7 +40,7 @@ const getFavoriteList = catchAsync(async (req, res) => {
  * @property  { String }  req.user.id - User ID
  * @returns   { JSON } - A JSON object representing the type and message
  */
-const addFavoriteProduct = catchAsync(async (req, res) => {
+export const addFavoriteProduct = catchAsync(async (req, res) => {
   // 1) Calling addFavoriteProduct service
   const { type, message, statusCode } =
     await favoriteService.addFavoriteProduct(req.user.id, req.body.productId);
@@ -68,7 +68,7 @@ const addFavoriteProduct = catchAsync(async (req, res) => {
  * @property  { String }  req.user.id - User ID
  * @returns   { JSON } - A JSON object representing the type and message
  */
-const deleteProductFromFavorite = catchAsync(async (req, res) => {
+export const deleteProductFromFavorite = catchAsync(async (req, res) => {
   // 1) Calling deleteProductFromFavorite service
   const { type, message, statusCode } =
     await favoriteService.deleteProductFromFavorite(req.user.id, req.params.id);
@@ -96,7 +96,7 @@ const deleteProductFromFavorite = catchAsync(async (req, res) => {
  * @property  { String }  req.user.id - User ID
  * @returns   { JSON } - A JSON object representing the type and message
  */
-const checkProductInFavoriteList = catchAsync(async (req, res) => {
+export const checkProductInFavoriteList = catchAsync(async (req, res) => {
   // 1) Calling checkProductInFavoriteList service
   const { type, message, statusCode } =
     await favoriteService.checkProductInFavoriteList(
@@ -118,4 +118,3 @@ const checkProductInFavoriteList = catchAsync(async (req, res) => {
     message: req.polyglot.t(message)
   });
 });
-module.exports = { addFavoriteProduct, getFavoriteList, deleteProductFromFavorite, checkProductInFavoriteList }

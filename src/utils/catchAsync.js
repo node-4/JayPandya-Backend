@@ -5,4 +5,4 @@ const catchAsync = (fn) =>
     return Promise.resolve(fnReturn).catch(next);
   };
 
-module.exports = catchAsync;
+export default catchAsync;

@@ -1,8 +1,8 @@
 // Utils
-const catchAsync = require('../utils/catchAsync');
+import catchAsync from '../utils/catchAsync';
 
 // Services
-const { productService } = require('../services/index');
+import { productService } from '../services/index';
 
 /**
  * @desc      Get All Products Controller
@@ -14,7 +14,7 @@ const { productService } = require('../services/index');
  * @property  { Number } req.query.limit - Maximum number of products
  * @returns   { JSON } - A JSON object representing the type, message and the products
  */
-const getAllProducts = catchAsync(async (req, res) => {
+export const getAllProducts = catchAsync(async (req, res) => {
   let { page, sort, limit, select } = req.query;
 
   // 1) Setting default params
@@ -42,6 +42,7 @@ const getAllProducts = catchAsync(async (req, res) => {
     products
   });
 });
+
 /**
  * @desc      Get Product Using It's ID Controller
  * @param     { Object } req - Request object
@@ -49,7 +50,7 @@ const getAllProducts = catchAsync(async (req, res) => {
  * @property  { String } req.params.productId - Product ID
  * @returns   { JSON } - A JSON object representing the type, message, and the product
  */
-const getProduct = catchAsync(async (req, res) => {
+export const getProduct = catchAsync(async (req, res) => {
   // 1) Get product using it's ID
   const { type, message, statusCode, product } =
     await productService.queryProductById(req.params.productId);
@@ -69,6 +70,7 @@ const getProduct = catchAsync(async (req, res) => {
     product
   });
 });
+
 /**
  * @desc      Create New Product Controller
  * @param     { Object } req - Request object
@@ -78,7 +80,7 @@ const getProduct = catchAsync(async (req, res) => {
  * @property  { String } req.user.id - User ID
  * @returns   { JSON } - A JSON object representing the type, message and the product
  */
-const addProduct = catchAsync(async (req, res) => {
+export const addProduct = catchAsync(async (req, res) => {
   const { body, files } = req;
   console.log(files)
 
@@ -102,6 +104,7 @@ const addProduct = catchAsync(async (req, res) => {
     product
   });
 });
+
 /**
  * @desc      Add Product Color Controller
  * @param     { Object } req - Request object
@@ -111,7 +114,7 @@ const addProduct = catchAsync(async (req, res) => {
  * @property  { String } req.body.color - Product color
  * @returns   { JSON } - A JSON object representing the type, message and the product
  */
-const addProductColor = catchAsync(async (req, res) => {
+export const addProductColor = catchAsync(async (req, res) => {
   // 1) Add product color
   const { type, message, statusCode, color } =
     await productService.addProductColor(
@@ -135,6 +138,7 @@ const addProductColor = catchAsync(async (req, res) => {
     color
   });
 });
+
 /**
  * @desc      Add Product Size Controller
  * @param     { Object } req - Request object
@@ -144,7 +148,7 @@ const addProductColor = catchAsync(async (req, res) => {
  * @property  { String } req.body.size - Product size
  * @returns   { JSON } - A JSON object representing the type, message and the product
  */
-const addProductSize = catchAsync(async (req, res) => {
+export const addProductSize = catchAsync(async (req, res) => {
   // 1) Add product size
   const { type, message, statusCode, size } =
     await productService.addProductSize(
@@ -168,6 +172,7 @@ const addProductSize = catchAsync(async (req, res) => {
     size
   });
 });
+
 /**
  * @desc      Update Product Details Controller
  * @param     { Object } req - Request object
@@ -177,7 +182,7 @@ const addProductSize = catchAsync(async (req, res) => {
  * @property  { Object } req.body - Body object data
  * @returns   { JSON } - A JSON object representing the type, message and the product
  */
-const updateProductDetails = catchAsync(async (req, res) => {
+export const updateProductDetails = catchAsync(async (req, res) => {
   // 1) Update product details using it's ID
   const { type, message, statusCode, product } =
     await productService.updateProductDetails(
@@ -200,6 +205,7 @@ const updateProductDetails = catchAsync(async (req, res) => {
     product
   });
 });
+
 /**
  * @desc      Update Product Main Image Controller
  * @param     { Object } req - Request object
@@ -209,7 +215,7 @@ const updateProductDetails = catchAsync(async (req, res) => {
  * @property  { Object } req.files - Product main image
  * @returns   { JSON } - A JSON object representing the type, message, and the product
  */
-const updateProductMainImage = catchAsync(async (req, res) => {
+export const updateProductMainImage = catchAsync(async (req, res) => {
   // 1) Update product main image using it's ID
   const { type, message, statusCode, product } =
     await productService.updateProductMainImage(
@@ -232,6 +238,7 @@ const updateProductMainImage = catchAsync(async (req, res) => {
     product
   });
 });
+
 /**
  * @desc      Update Product Images Controller
  * @param     { Object } req - Request object
@@ -241,7 +248,7 @@ const updateProductMainImage = catchAsync(async (req, res) => {
  * @property  { Object } req.files - Product sub images
  * @returns   { JSON } - A JSON object representing the type, message, and the product
  */
-const updateProductImages = catchAsync(async (req, res) => {
+export const updateProductImages = catchAsync(async (req, res) => {
   // 1) Update product images using it's ID
   const { type, message, statusCode, product } =
     await productService.updateProductImages(
@@ -265,6 +272,7 @@ const updateProductImages = catchAsync(async (req, res) => {
     product
   });
 });
+
 /**
  * @desc      Delete Product Controller
  * @param     { Object } req - Request object
@@ -273,7 +281,7 @@ const updateProductImages = catchAsync(async (req, res) => {
  * @property  { String } req.user.id - Seller ID
  * @return    { JSON } - A JSON object representing the type and message
  */
-const deleteProduct = catchAsync(async (req, res) => {
+export const deleteProduct = catchAsync(async (req, res) => {
   // 1) Delete product using it's ID
   const { type, message, statusCode } = await productService.deleteProduct(
     req.params.productId,
@@ -293,6 +301,7 @@ const deleteProduct = catchAsync(async (req, res) => {
     message: req.polyglot.t(message)
   });
 });
+
 /**
  * @desc      Delete Product Color Controller
  * @param     { Object } req - Request object
@@ -302,7 +311,7 @@ const deleteProduct = catchAsync(async (req, res) => {
  * @property  { String } req.body.color - Product color
  * @return    { JSON } - A JSON object representing the type and message
  */
-const deleteProductColor = catchAsync(async (req, res) => {
+export const deleteProductColor = catchAsync(async (req, res) => {
   // 1) Delete product color
   const { type, message, statusCode } = await productService.deleteProductColor(
     req.params.productId,
@@ -324,6 +333,7 @@ const deleteProductColor = catchAsync(async (req, res) => {
     message: req.polyglot.t(message)
   });
 });
+
 /**
  * @desc      Delete Product Size Controller
  * @param     { Object } req - Request object
@@ -333,7 +343,7 @@ const deleteProductColor = catchAsync(async (req, res) => {
  * @property  { String } req.body.size - Product size
  * @return    { JSON } - A JSON object representing the type and message
  */
-const deleteProductSize = catchAsync(async (req, res) => {
+export const deleteProductSize = catchAsync(async (req, res) => {
   // 1) Delete product size
   const { type, message, statusCode } = await productService.deleteProductSize(
     req.params.productId,
@@ -355,23 +365,27 @@ const deleteProductSize = catchAsync(async (req, res) => {
     message: req.polyglot.t(message)
   });
 });
+
 /**
  * @desc    Get Top 5 Cheapeast Products Controller
  * @param   { Object } req - Request object
  * @param   { Object } res - Response object
  * @param   { Object } next - Next function
  */
-const top5Cheap = catchAsync(async (req, res, next) => {
+export const top5Cheap = catchAsync(async (req, res, next) => {
   // Limiting products to top 5 products
   // Sorting products according to it's price asc and according to ratings average des
   req.query.limit = '5';
   req.query.sort = '-ratingsAverage,price';
   next();
 });
+
+
 /**
  * Get all ProductData 
  */
-const getAllProduct = catchAsync(async (req, res) => {
+
+export const getAllProduct = catchAsync(async(req, res) => {
   console.log("Enter ")
   const stats = await productService.allProduct()
   return res.status(200).json({
@@ -379,13 +393,14 @@ const getAllProduct = catchAsync(async (req, res) => {
     stats
   })
 })
+
 /**
  * @desc    Get Products Statics Controller
  * @param   { Object } req - Request object
  * @param   { Object } res - Response object
  * @return  { JSON } - A JSON object representing the type, message and the stats
  */
-const productStats = catchAsync(async (req, res) => {
+export const productStats = catchAsync(async (req, res) => {
   // 1) Get product stats
   const stats = await productService.getProductStats();
 
@@ -396,7 +411,8 @@ const productStats = catchAsync(async (req, res) => {
     stats
   });
 });
-const UploadProductExcal = catchAsync(async (req, res) => {
+
+export const UploadProductExcal = catchAsync(async(req, res) => {
   const { file } = req; // get the uploaded file from the request object
   const fileName = file.originalname;
   console.log(file) // get the original file name
@@ -408,4 +424,3 @@ const UploadProductExcal = catchAsync(async (req, res) => {
     stats
   });
 })
-module.exports = { getAllProduct, top5Cheap, getAllProducts, getProduct, addProduct, productStats, updateProductDetails, addProductColor, addProductSize, deleteProductColor, deleteProductSize, updateProductMainImage, updateProductImages, deleteProduct, UploadProductExcal }

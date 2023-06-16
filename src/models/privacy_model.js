@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 
-const privacy = mongoose.Schema({
+const privacy  = mongoose.Schema({
     Privacy: {
         type: String
-    },
+    }, 
 })
 
-const Privacy = mongoose.model('privacy', privacy);
+const Privacy =  mongoose.model('privacy', privacy);
 
-module.exports = Privacy
+export default Privacy

@@ -1,4 +1,4 @@
-const getAllProductReviews = {
+export const getAllProductReviews = {
   security: {
     jwt: []
   },
@@ -110,7 +110,8 @@ const getAllProductReviews = {
     }
   }
 };
-const getReview = {
+
+export const getReview = {
   security: {
     jwt: []
   },
@@ -188,7 +189,8 @@ const getReview = {
     }
   }
 };
-const addReview = {
+
+export const addReview = {
   tags: ['Review'],
   description:
     'This route allow logged in user/seller/admin to make a review on a product',
@@ -250,7 +252,8 @@ const addReview = {
     }
   }
 };
-const updateReview = {
+
+export const updateReview = {
   tags: ['Review'],
   description:
     "This route allow logged in user/seller/admin to update review using it's ID",
@@ -318,7 +321,8 @@ const updateReview = {
     }
   }
 };
-const deleteReview = {
+
+export const deleteReview = {
   tags: ['Review'],
   description:
     "This route allow logged in user/seller/admin to delete review using it's ID",
@@ -387,4 +391,3 @@ const deleteReview = {
     }
   }
 };
-module.exports = { getAllProductReviews, getAllProductReviews, addReview, updateReview, deleteReview }

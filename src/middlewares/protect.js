@@ -1,10 +1,19 @@
-const { promisify }  = require('util');
-const jwt = require('jsonwebtoken');
-const config = require('../config/config');
-const AppError = require('../utils/appError');
-const catchAsync = require('../utils/catchAsync');
-const { User } = require('../models/index');
+// Packages
+import { promisify } from 'util';
+import jwt from 'jsonwebtoken';
+
+// Configs
+import config from '../config/config';
+
+// Utils
+import AppError from '../utils/appError';
+import catchAsync from '../utils/catchAsync';
+
+// Models
+import { User } from '../models/index';
+
 const protect = catchAsync(async (req, res, next) => {
+  // 1) Getting the token
   let token;
   if (
     req.headers.authorization &&
@@ -14,10 +23,10 @@ const protect = catchAsync(async (req, res, next) => {
   } else if (req.cookies && req.cookies.jwt) {
     token = req.cookies.jwt;
   }
-
-  //   const authHeader = req.header.authorization;
-  //   console.log(authHeader)
-  //  // const token = authHeader && authHeader.split(' ')[1];
+  
+//   const authHeader = req.header.authorization;
+//   console.log(authHeader)
+//  // const token = authHeader && authHeader.split(' ')[1];
   console.log(token)
   // 2) Check if token does not exist
   if (!token) {
@@ -54,4 +63,4 @@ const protect = catchAsync(async (req, res, next) => {
   next();
 });
 
-module.exports = protect;
+export default protect;

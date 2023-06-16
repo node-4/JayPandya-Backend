@@ -1,4 +1,4 @@
-const addFavoriteProduct = {
+export const addFavoriteProduct = {
   tags: ['Favorite'],
   description:
     'This route allow logged in user/seller/admin to add product to his favorite list',
@@ -91,7 +91,7 @@ const addFavoriteProduct = {
   }
 };
 
-const getFavoriteList = {
+export const getFavoriteList = {
   tags: ['Favorite'],
   description:
     'This route allow logged in user/seller/admin to get his favorite products list',
@@ -167,7 +167,7 @@ const getFavoriteList = {
   }
 };
 
-const deleteProductFromFavorite = {
+export const deleteProductFromFavorite = {
   tags: ['Favorite'],
   description:
     'This route allow logged in user/seller/admin to delete product from favorite list',
@@ -230,7 +230,7 @@ const deleteProductFromFavorite = {
   }
 };
 
-const checkProductInFavoriteList = {
+export const checkProductInFavoriteList = {
   tags: ['Favorite'],
   description:
     'This route allow logged in user/seller/admin to check if product in favorite list',
@@ -292,4 +292,3 @@ const checkProductInFavoriteList = {
     }
   }
 };
-module.exports = { addFavoriteProduct, getFavoriteList, deleteProductFromFavorite, checkProductInFavoriteList }

@@ -1,8 +1,8 @@
 // Utils
-const catchAsync = require('../utils/catchAsync');
+import catchAsync from '../utils/catchAsync';
 
 // Services
-const { orderService } = require('../services/index');
+import { orderService } from '../services/index';
 
 /**
  * @desc      Create New Order Controller
@@ -12,7 +12,7 @@ const { orderService } = require('../services/index');
  * @property  { Object } req.user - An object contains logged in user data
  * @return    { JSON } - A JSON object representing the type, message and the order
  */
-const createOrder = catchAsync(async (req, res) => {
+export const createOrder = catchAsync(async (req, res) => {
   // 1) Create new order
   const { type, message, statusCode, order } = await orderService.createOrder(
     req.body,
@@ -43,7 +43,7 @@ const createOrder = catchAsync(async (req, res) => {
  * @property  { String } req.params.id - Order ID
  * @return    { JSON } - A JSON object representing the type, message and the order
  */
-const orderStatus = catchAsync(async (req, res) => {
+export const orderStatus = catchAsync(async (req, res) => {
   // 1) Update order status
   const { type, message, statusCode } = await orderService.orderStatus(
     req.body.status,
@@ -75,7 +75,7 @@ const orderStatus = catchAsync(async (req, res) => {
  * @property  { Number }  req.query.limit - Limit number of items
  * @return    { JSON } - A JSON object representing the type, message and the orders
  */
-const getAllOrders = catchAsync(async (req, res) => {
+export const getAllOrders = catchAsync(async (req, res) => {
   let { page, sort, limit, select } = req.query;
 
   // // 1) Setting default params
@@ -112,7 +112,7 @@ const getAllOrders = catchAsync(async (req, res) => {
  * @property  { String } req.params.id - Order ID
  * @return    { JSON } - A JSON object representing the type, message and the order
  */
-const getOrder = catchAsync(async (req, res) => {
+export const getOrder = catchAsync(async (req, res) => {
   // 1) Get order using it's ID
   const { type, message, statusCode, order } = await orderService.queryOrder(
     req.params.id
@@ -141,7 +141,7 @@ const getOrder = catchAsync(async (req, res) => {
  * @property  { String } req.params.id - Order ID
  * @return    { JSON } - A JSON object representing the type and message
  */
-const cancelOrder = catchAsync(async (req, res) => {
+export const cancelOrder = catchAsync(async (req, res) => {
   // 1) Cancel order using it's ID
   const { type, message, statusCode } = await orderService.cancelOrder(
     req.params.id
@@ -161,4 +161,3 @@ const cancelOrder = catchAsync(async (req, res) => {
     message: req.polyglot.t(message)
   });
 });
-module.exports = { createOrder, orderStatus, getAllOrders, getOrder, cancelOrder }

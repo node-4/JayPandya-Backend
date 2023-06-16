@@ -1,20 +1,27 @@
 // Packages
-const express = require('express');
-const multer = require('multer');
-const { productController } = require('../controllers/index');
-//const protect= require('../middlewares/protect');
-const { anyMulter } = require('../utils/multer');
-const reviewRoute = require('./review.route');
+import express from 'express';
+
+// Controllers
+import { productController } from '../controllers/index';
+import multer  from 'multer';
+// Middlewares
+//import protect from '../middlewares/protect';
+
+// Utils
+import { anyMulter } from '../utils/multer';
+
+// Routes
+import reviewRoute from './review.route';
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    console.log(file)
-    cb(null, 'upload/');
+       console.log(file)
+      cb(null, 'upload/');
   },
   filename: (req, file, cb) => {
     console.log(file.originalname)
-    cb(null, file.originalname);
-
+      cb(null,file.originalname);
+      
   }
 });
 const upload = multer({ storage: storage });
@@ -40,7 +47,7 @@ const {
   deleteProduct,
   top5Cheap,
   productStats,
-  UploadProductExcal,
+  UploadProductExcal, 
   getAllProduct
 } = productController;
 
@@ -75,7 +82,7 @@ router.patch('/:productId/images', anyMulter(), updateProductImages);
 
 router.delete('/:productId', deleteProduct);
 
-router.post('/add', upload.single('file'), UploadProductExcal)
+router.post('/add', upload.single('file'), UploadProductExcal )
 
 router.get('/', getAllProduct)
-module.exports = router;
+export default router;

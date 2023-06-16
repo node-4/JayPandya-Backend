@@ -1,9 +1,8 @@
 // Utils
-const catchAsync = require('../utils/catchAsync');
-
+import catchAsync from '../utils/catchAsync';
 
 // Models
-const { Cart, Product } = require('../models/index');
+import { Cart, Product } from '../models/index';
 
 /**
  * @desc    Add Product To Cart
@@ -14,11 +13,11 @@ const { Cart, Product } = require('../models/index');
 //  * @param   { String } selectedSize - Selected Size
  * @returns { Object<type|message|statusCode|cart> }
  */
-const addProductToCart = catchAsync(
+export const addProductToCart = catchAsync(
   async (email, productId, quantity,) => {
     const cart = await Cart.findOne({ email });
     console.log(productId)
-    const product = await Product.findById({ _id: productId });
+    const product = await Product.findById({_id: productId});
 
     // 1) Check if product doesn't exist
     if (!product) {
@@ -126,7 +125,7 @@ const addProductToCart = catchAsync(
  * @param   { String } selectedSize - Selected Size
  * @returns { Object<type|message|statusCode|cart> }
  */
-const reduceByOne = catchAsync(
+export const reduceByOne = catchAsync(
   async (email, productId, selectedColor, selectedSize) => {
     const cart = await Cart.findOne({ email });
     const product = await Product.findById(productId);
@@ -161,18 +160,18 @@ const reduceByOne = catchAsync(
       if (
         cart.items[indexFound].totalProductQuantity === 1 &&
         cart.items[indexFound].selectedColor._id.toString() ===
-        selectedColor.toString() &&
+          selectedColor.toString() &&
         cart.items[indexFound].selectedSize._id.toString() ===
-        selectedSize.toString()
+          selectedSize.toString()
       ) {
         cart.items.splice(indexFound, 1);
         cart.totalQuantity -= 1;
         cart.totalPrice -= priceDiscount;
       } else if (
         cart.items[indexFound].selectedColor._id.toString() ===
-        selectedColor.toString() &&
+          selectedColor.toString() &&
         cart.items[indexFound].selectedSize._id.toString() ===
-        selectedSize.toString()
+          selectedSize.toString()
       ) {
         const updatedProductTotalQuantity =
           cart.items[indexFound].totalProductQuantity - 1;
@@ -213,7 +212,7 @@ const reduceByOne = catchAsync(
  * @param   { String } selectedSize - Selected Size
  * @returns { Object<type|message|statusCode|cart> }
  */
-const increaseByOne = catchAsync(
+export const increaseByOne = catchAsync(
   async (email, productId, selectedColor, selectedSize) => {
     let cart = await Cart.findOne({ email });
     const product = await Product.findById(productId);
@@ -257,9 +256,9 @@ const increaseByOne = catchAsync(
     for (const indexFound of indexesFound) {
       if (
         cart.items[indexFound].selectedColor._id.toString() ===
-        selectedColor.toString() &&
+          selectedColor.toString() &&
         cart.items[indexFound].selectedSize._id.toString() ===
-        selectedSize.toString()
+          selectedSize.toString()
       ) {
         const updatedProductTotalQuantity =
           cart.items[indexFound].totalProductQuantity + 1;
@@ -301,7 +300,7 @@ const increaseByOne = catchAsync(
  * @param   { String } email - User email address
  * @returns { Object<type|message|statusCode|cart> }
  */
-const queryCart = catchAsync(async (email) => {
+export const queryCart = catchAsync(async (email) => {
   const cart = await Cart.findOne({ email });
 
   // 1) Check if cart doesn't exist
@@ -327,7 +326,7 @@ const queryCart = catchAsync(async (email) => {
  * @param   { String } email - User email address
  * @return  { Object<type|message|statusCode> }
  */
-const deleteCart = catchAsync(async (email) => {
+export const deleteCart = catchAsync(async (email) => {
   const cart = await Cart.findOne({ email });
 
   // 1) Check if cart doesn't exist
@@ -358,7 +357,7 @@ const deleteCart = catchAsync(async (email) => {
  * @param   { String } selectedSize - Selected Size
  * @returns { Object<type|message|statusCode|cart> }
  */
-const deleteItem = catchAsync(
+export const deleteItem = catchAsync(
   async (email, productId, selectedColor, selectedSize) => {
     let cart = await Cart.findOne({ email });
 
@@ -390,9 +389,9 @@ const deleteItem = catchAsync(
     for (const indexFound of indexesFound) {
       if (
         cart.items[indexFound].selectedColor._id.toString() ===
-        selectedColor.toString() &&
+          selectedColor.toString() &&
         cart.items[indexFound].selectedSize._id.toString() ===
-        selectedSize.toString()
+          selectedSize.toString()
       ) {
         const totalPrice =
           cart.totalPrice - cart.items[indexFound].totalProductPrice;
@@ -430,4 +429,3 @@ const deleteItem = catchAsync(
     };
   }
 );
-module.exports = { addProductToCart, reduceByOne, increaseByOne, queryCart, deleteCart, deleteItem }

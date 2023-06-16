@@ -1,9 +1,8 @@
-const mongoose = require('mongoose');
-const Product = require('./product.model');
+import mongoose from 'mongoose';
+import Product from './product.model';
 
 // Plugins
-const toJSON = require('./plugins/index');
-
+import toJSON from './plugins/index';
 
 const reviewSchema = mongoose.Schema(
   {
@@ -86,4 +85,4 @@ reviewSchema.post(/^findByIdAnd/, async function () {
 
 const Review = mongoose.model('Review', reviewSchema);
 
-module.exports = Review;
+export default Review;

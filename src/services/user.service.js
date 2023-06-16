@@ -1,13 +1,11 @@
 // Utils
-const catchAsync = require('../utils/catchAsync');
-const APIFeatures = require('../utils/apiFeatures');
-
-const dataUri = require('../utils/datauri');
-
-const { uploadFile, destroyFile } = require('../utils/cloudinary');
+import catchAsync from '../utils/catchAsync';
+import APIFeatures from '../utils/apiFeatures';
+import dataUri from '../utils/datauri';
+import { uploadFile, destroyFile } from '../utils/cloudinary';
 
 // Models
-const { User } = require('../models/index');
+import { User } from '../models/index';
 
 /**
  * @docs    Create New User
@@ -15,7 +13,7 @@ const { User } = require('../models/index');
  * @param   { Object } profileImage - User profile image
  * @returns { Object<type|message|statusCode|user> }
  */
-const createUser = catchAsync(async (body, profileImage) => {
+export const createUser = catchAsync(async (body, profileImage) => {
   // 1) Check if profile image provided
   // if (profileImage === undefined) {
   //   return {
@@ -93,12 +91,13 @@ const createUser = catchAsync(async (body, profileImage) => {
     user
   };
 });
+
 /**
  * @desc    Query Users
  * @param   { Object } req - Request object
  * @returns { Object<type|message|statusCode|users> }
  */
-const queryUsers = catchAsync(async (req) => {
+export const queryUsers = catchAsync(async (req) => {
   const users = await APIFeatures(req, User);
 
   // 1) Check if users doesn't exist
@@ -118,12 +117,13 @@ const queryUsers = catchAsync(async (req) => {
     users
   };
 });
+
 /**
  * @desc    Query User Using It's ID
  * @param   { Object } id - User ID
  * @return  { Object<type|message|statusCode|user> }
  */
-const queryUser = catchAsync(async (id) => {
+export const queryUser = catchAsync(async (id) => {
   const user = await User.findById(id);
 
   // 1) Check if user doesn't exist
@@ -143,13 +143,14 @@ const queryUser = catchAsync(async (id) => {
     user
   };
 });
+
 /**
  * @desc    Update User Details Using It's ID
  * @param   { Object } user - An object contains logged in user data
  * @param   { Object } body - Body object data
  * @returns { Object<type|message|statusCode|user> }
  */
-const updateUserDetails = catchAsync(async (user, body) => {
+export const updateUserDetails = catchAsync(async (user, body) => {
   const { id } = user;
   const { password, passwordConfirmation, email } = body;
 
@@ -187,13 +188,14 @@ const updateUserDetails = catchAsync(async (user, body) => {
     user
   };
 });
+
 /**
  * @desc    Update User Profile Image Using It's ID
  * @param   { Object } user - An object contains logged in user data
  * @param   { Object } profileImage - Updated Profile Image
  * @returns { Object<type|message|statusCode|user> }
  */
-const updateUserProfileImage = catchAsync(async (user, profileImage) => {
+export const updateUserProfileImage = catchAsync(async (user, profileImage) => {
   // 1) Check if profile imae is provided
   if (profileImage === undefined) {
     return {
@@ -238,15 +240,19 @@ const updateUserProfileImage = catchAsync(async (user, profileImage) => {
     statusCode: 200
   };
 });
-//  const AllUsers = catchAsync(async() => {
 
+
+// export const AllUsers = catchAsync(async() => {
+  
 // })
+
+
 /**
  * @desc    Delete User Using It's ID
  * @param   { String } id - User ID,
  * @returns { Object<type|message|statusCode> }
  */
-const deleteUser = catchAsync(async (id) => {
+export const deleteUser = catchAsync(async (id) => {
 
   const user = await User.findByIdAndDelete(id);
 
@@ -269,12 +275,13 @@ const deleteUser = catchAsync(async (id) => {
     statusCode: 200
   };
 });
+
 /**
  * @desc    Delete LoggedIn User Data Service
  * @param   { String } id - User ID,
  * @returns { Object<type|message|statusCode> }
  */
-const deleteMyAccount = catchAsync(async (user) => {
+export const deleteMyAccount = catchAsync(async (user) => {
   const { id, profileImageId } = user;
 
   // 1) Delete user profile image
@@ -290,4 +297,3 @@ const deleteMyAccount = catchAsync(async (user) => {
     statusCode: 200
   };
 });
-module.exports = { createUser, queryUsers, queryUser, updateUserDetails, updateUserProfileImage, deleteUser, deleteMyAccount }

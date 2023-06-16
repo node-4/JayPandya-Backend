@@ -1,5 +1,5 @@
-const Polyglot = require('node-polyglot');
-const { messages } = require('../config/i18n');
+import Polyglot from 'node-polyglot';
+import { messages } from '../config/i18n';
 
 const startPolyglot = (req, res, next) => {
   // Get the locale from express-locale
@@ -18,4 +18,4 @@ const startPolyglot = (req, res, next) => {
   next();
 };
 
-module.exports = startPolyglot;
+export default startPolyglot;

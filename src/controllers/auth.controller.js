@@ -1,7 +1,18 @@
-const catchAsync = require('../utils/catchAsync');
-const { sendResetPasswordEmail, sendVerificationEmail1 } = require('../utils/sendEmail');
-const { generateVerifyEmailToken, generateResetPasswordToken } = require('../middlewares/token');
-const { authService } = require('../services');
+// Utils
+import catchAsync from '../utils/catchAsync';
+import {
+  sendResetPasswordEmail,
+  sendVerificationEmail as sendVerifyEmail
+} from '../utils/sendEmail';
+
+// Middlewares
+import {
+  generateVerifyEmailToken,
+  generateResetPasswordToken
+} from '../middlewares/token';
+
+// Services
+import { authService } from '../services';
 
 /**
  * @desc      Sign Up Controller
@@ -11,7 +22,7 @@ const { authService } = require('../services');
  * @property  { Object } req.file - User image
  * @returns   { JSON } - A JSON object representing the type, message, user data, and tokens
  */
-const signup = catchAsync(async (req, res) => {
+export const signup = catchAsync(async (req, res) => {
   // 1) Calling sign up service
   const { type, message, statusCode, user, tokens } = await authService.signup(
     req.body,
@@ -43,7 +54,7 @@ const signup = catchAsync(async (req, res) => {
  * @property  { Object } req.body.password - User password
  * @returns   { JSON } - A JSON object representing the type, message, user data, and tokens
  */
-const signin = catchAsync(async (req, res) => {
+export const signin = catchAsync(async (req, res) => {
   const { email, password } = req.body;
 
   // 1) Calling sign in service
@@ -76,7 +87,7 @@ const signin = catchAsync(async (req, res) => {
  * @property  { Object } req.body.refreshToken - User refresh token
  * @returns   { JSON } - A JSON object representing the type and message
  */
-const logout = catchAsync(async (req, res) => {
+export const logout = catchAsync(async (req, res) => {
   // 1) Calling log out service
   const { type, message, statusCode } = await authService.logout(
     req.body.refreshToken
@@ -104,7 +115,7 @@ const logout = catchAsync(async (req, res) => {
  * @property  { Object } req.body.refreshToken - User refresh token
  * @returns   { JSON } - A JSON object representing the type, message, and tokens
  */
-const refreshTokens = catchAsync(async (req, res) => {
+export const refreshTokens = catchAsync(async (req, res) => {
   // 1) Calling refresh token service
   const { type, message, statusCode, tokens } = await authService.refreshAuth(
     req.body.refreshToken
@@ -133,7 +144,7 @@ const refreshTokens = catchAsync(async (req, res) => {
  * @property  { Object } req.body.email - User email address
  * @returns   { JSON } - A JSON object representing the type and message
  */
-const forgotPassword = catchAsync(async (req, res) => {
+export const forgotPassword = catchAsync(async (req, res) => {
   const { email } = req.body;
 
   // 1) Generate reset password token
@@ -153,12 +164,12 @@ const forgotPassword = catchAsync(async (req, res) => {
  * @desc      Reset Password Controller
  * @param     { Object } req - Request object
  * @param     { Object } res - Response object
- * @property  { String } req.query.token - Token require(request query
+ * @property  { String } req.query.token - Token from request query
  * @property  { String } req.body.password - The new user password
  * @property  { String } req.body.passwordConfirmation - The new user password confirmation
  * @returns   { JSON } - A JSON object representing the type and message
  */
-const resetPassword = catchAsync(async (req, res) => {
+export const resetPassword = catchAsync(async (req, res) => {
   // 1) Calling reset password service
   const { type, message, statusCode } = await authService.resetPassword(
     req.query.token,
@@ -191,7 +202,7 @@ const resetPassword = catchAsync(async (req, res) => {
  * @property  { String } req.user.id - User ID
  * @returns   { JSON } - A JSON object representing the type and message
  */
-const changePassword = catchAsync(async (req, res) => {
+export const changePassword = catchAsync(async (req, res) => {
   const { currentPassword, password, passwordConfirmation } = req.body;
   // 1) Calling reset password service
   const { type, message, statusCode } = await authService.changePassword(
@@ -223,7 +234,7 @@ const changePassword = catchAsync(async (req, res) => {
  * @property  { Object } req.user - An object contains logged in user data
  * @returns   { JSON } - A JSON object representing the type and message
  */
-const sendVerificationEmail = catchAsync(async (req, res) => {
+export const sendVerificationEmail = catchAsync(async (req, res) => {
   const { user } = req;
 
   // 1) Check if user email is already verified
@@ -238,7 +249,7 @@ const sendVerificationEmail = catchAsync(async (req, res) => {
   const verifyEmailToken = await generateVerifyEmailToken(user);
 
   // 3) Sending verification email to user email
-  await sendVerifyEmail1(user.email, verifyEmailToken);
+  await sendVerifyEmail(user.email, verifyEmailToken);
 
   // 4) If everything is OK, send data
   return res.status(200).json({
@@ -254,7 +265,7 @@ const sendVerificationEmail = catchAsync(async (req, res) => {
  * @property  { Object } req.query.token - Verification token from request query
  * @returns   { JSON } - A JSON object representing the type and message
  */
-const verifyEmail = catchAsync(async (req, res) => {
+export const verifyEmail = catchAsync(async (req, res) => {
   // 1) Calling verify email service
   const { type, message, statusCode } = await authService.verifyEmail(
     req.query.token
@@ -274,4 +285,3 @@ const verifyEmail = catchAsync(async (req, res) => {
     message: req.polyglot.t(message)
   });
 });
-module.exports = { signup, signin, logout, refreshTokens, forgotPassword, resetPassword, changePassword, sendVerificationEmail, verifyEmail };

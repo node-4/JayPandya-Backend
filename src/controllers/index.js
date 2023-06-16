@@ -1,4 +1,4 @@
-const {
+import {
   signin,
   signup,
   logout,
@@ -8,19 +8,19 @@ const {
   verifyEmail,
   sendVerificationEmail,
   changePassword
-} = require('./auth.controller');
+} from './auth.controller';
 
 
 
-const {
+import {
   addTerms,
   getTerms,
   updateTerms,
   deleteTerms
-} = require('./terms');
+} from './terms'
 
 
-const {
+import {
   getAllProducts,
   getProduct,
   addProduct,
@@ -36,9 +36,9 @@ const {
   productStats,
   UploadProductExcal,
   getAllProduct
-} = require('./product.controller');
+} from './product.controller';
 
-const {
+import {
   createUser,
   getUsers,
   getUser,
@@ -46,83 +46,83 @@ const {
   updateUserProfileImage,
   deleteUser,
   deleteMyAccount
-} = require('./user.controller');
+} from './user.controller';
 
-const {
+import {
   getAllCategories,
   getCategory,
   addCategory,
   updateCategoryDetails,
   updateCategoryImage,
   deleteCategory
-} = require('./category.controller');
+} from './category.controller';
 
-const {
+import {
   getAllReviews,
   getReview,
   addReview,
   updateReview,
   deleteReview
-} = require('./review.controller');
+} from './review.controller';
 
-const {
+import {
   addItemToCart,
   reduceByOne,
   increaseByOne,
   getCart,
   deleteCart,
   deleteItem
-} = require('./cart.controller');
+} from './cart.controller';
 
-const {
+import {
   createOrder,
   orderStatus,
   getAllOrders,
   getOrder,
   cancelOrder
-} = require('./order.controller');
+} from './order.controller';
 
-const {
+import {
   getAllDiscountCodes,
   getDiscount,
   verifyDiscountCode,
   generateDiscountCode,
   deleteDiscountCode,
   cancelDiscountCode
-} = require('./discount.controller');
+} from './discount.controller';
 
-const {
+import {
   addFavoriteProduct,
   getFavoriteList,
   deleteProductFromFavorite,
   checkProductInFavoriteList
-} = require('./favorite.controller');
+} from './favorite.controller';
 
-const {
+import {
   addBanner,
   getAllBanners,
   DeleteBanner,
   BannerGetByID
-} = require('./banner_Controller')
+} from './banner_Controller'
 
 
 
-const {
+import {
   addprivacy,
   getprivacy,
   updateprivacy,
   deleteprivacy
-} = require('./privacy.controller');
+}from  './privacy.controller';
 
 
-const {
+import {
   addnotification,
   getnotification,
   updatenotification,
   deletenotification
-} = require('./notify.controller')
+} from './notify.controller'
 
-const {
+import {
   AddSupport,
   GetSupport,
   DeleSupport,
@@ -131,7 +131,7 @@ const {
   GetHelp,
   DeleHelp,
   UpdateHelp,
-} = require('./support_controller')
+} from './support_controller'
 
 
 
@@ -263,4 +263,19 @@ const supportAndHelp = {
   UpdateHelp,
 }
 
-module.exports = { authController, userController, productController, categoryController, reviewController, cartController, orderController, discountController, favoriteController, termControllers, privactContrller, notifyController, bannerController, supportAndHelp };
+export {
+  authController,
+  userController,
+  productController,
+  categoryController,
+  reviewController,
+  cartController,
+  orderController,
+  discountController,
+  favoriteController,
+  termControllers,
+  privactContrller,
+  notifyController,
+  bannerController,
+  supportAndHelp
+};

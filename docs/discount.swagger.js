@@ -1,4 +1,4 @@
-const generateDiscountCode = {
+export const generateDiscountCode = {
   tags: ['Discount'],
   description: 'This route allow admin to generate new discount code',
   opeationId: 'generateDiscountCode',
@@ -106,7 +106,8 @@ const generateDiscountCode = {
     }
   }
 };
-const getAllDiscountCodes = {
+
+export const getAllDiscountCodes = {
   tags: ['Discount'],
   description: 'This route allow admin to get all discount codes',
   opeationId: 'getAllDiscountCodes',
@@ -224,7 +225,8 @@ const getAllDiscountCodes = {
     }
   }
 };
-const getDiscount = {
+
+export const getDiscount = {
   tags: ['Discount'],
   description: 'This route allow user to get discount amount',
   opeationId: 'getDiscount',
@@ -283,7 +285,8 @@ const getDiscount = {
     }
   }
 };
-const deleteDiscountCode = {
+
+export const deleteDiscountCode = {
   tags: ['Discount'],
   description: 'This route allow logged in admin to delete discount code',
   opeationId: 'deleteDiscountCode',
@@ -344,7 +347,8 @@ const deleteDiscountCode = {
     }
   }
 };
-const verifyDiscountCode = {
+
+export const verifyDiscountCode = {
   tags: ['Discount'],
   description: 'This route allow logged in user/seller to verify discount code',
   opeationId: 'verifyDiscountCode',
@@ -439,7 +443,8 @@ const verifyDiscountCode = {
     }
   }
 };
-const cancelDiscountCode = {
+
+export const cancelDiscountCode = {
   tags: ['Discount'],
   description: 'This route allow logged in user to cancel discount code',
   opeationId: 'cancelDiscountCode',
@@ -498,4 +503,3 @@ const cancelDiscountCode = {
     }
   }
 };
-module.exports = { generateDiscountCode, getAllDiscountCodes, getDiscount, deleteDiscountCode, verifyDiscountCode, cancelDiscountCode }

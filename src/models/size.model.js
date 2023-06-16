@@ -1,9 +1,8 @@
 // Packages
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 // Plugins
-const toJSON = require('./plugins/index');
-
+import toJSON from './plugins/index';
 
 const sizeSchema = mongoose.Schema(
   {
@@ -27,4 +26,4 @@ sizeSchema.plugin(toJSON);
 
 const Size = mongoose.model('Size', sizeSchema);
 
-module.exports = Size;
+export default Size;

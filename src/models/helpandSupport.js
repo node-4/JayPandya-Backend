@@ -1,9 +1,9 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const helpAndSupport = mongoose.Schema({
     name: {
         type: String
-    },
+    }, 
     message: {
         type: String
     }
@@ -12,4 +12,4 @@ const helpAndSupport = mongoose.Schema({
 
 const Help = mongoose.model('helpandSupport', helpAndSupport);
 
-module.exports = Help;
+export default Help;

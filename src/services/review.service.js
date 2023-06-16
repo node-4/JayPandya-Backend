@@ -1,6 +1,9 @@
-const catchAsync = require('../utils/catchAsync');
-const APIFeatures = require('../utils/apiFeatures');
-const { Review, Product } = require('../models/index');
+// Utils
+import catchAsync from '../utils/catchAsync';
+import APIFeatures from '../utils/apiFeatures';
+
+// Models
+import { Review, Product } from '../models/index';
 
 /**
  * @desc    Create New Review
@@ -9,7 +12,7 @@ const { Review, Product } = require('../models/index');
  * @param   { Object } user - An object contains logged in user data
  * @returns { Object<type|message|statusCode|review> }
  */
-const createReview = catchAsync(async (product, user, body) => {
+export const createReview = catchAsync(async (product, user, body) => {
   const { review, rating } = body;
 
   // 1) Check if user entered all fields
@@ -62,7 +65,7 @@ const createReview = catchAsync(async (product, user, body) => {
  * @param   { Object } req - Request object
  * @returns { Object<type|message|statusCode|reviews> }
  */
-const queryReviews = catchAsync(async (req) => {
+export const queryReviews = catchAsync(async (req) => {
   const product = await Product.findById(req.params.productId);
 
   // 1) Check if product doesn't exist
@@ -105,7 +108,7 @@ const queryReviews = catchAsync(async (req) => {
  * @param   { String } reviewId - Review ID
  * @returns { Object<type|message|statusCode|review> }
  */
-const queryReviewById = catchAsync(async (productId, reviewId) => {
+export const queryReviewById = catchAsync(async (productId, reviewId) => {
   const product = await Product.findById(productId);
 
   // 1) Check if product doesn't exist'
@@ -145,7 +148,7 @@ const queryReviewById = catchAsync(async (productId, reviewId) => {
  * @param   { Object } body - Body object data
  * @returns { Object<type|message|statusCode|review> }
  */
-const updateReview = catchAsync(
+export const updateReview = catchAsync(
   async (userId, productId, reviewId, body) => {
     const product = await Product.findById(productId);
 
@@ -210,7 +213,7 @@ const updateReview = catchAsync(
  * @param   { String } userId - User ID
  * @returns { Object<type|message|statusCode> }
  */
-const deleteReview = catchAsync(async (productId, reviewId, userId) => {
+export const deleteReview = catchAsync(async (productId, reviewId, userId) => {
   const product = await Product.findById(productId);
 
   // 1) Check if product doesn't exist
@@ -252,5 +255,3 @@ const deleteReview = catchAsync(async (productId, reviewId, userId) => {
     statusCode: 200
   };
 });
-module.exports = { createReview, queryReviewById, queryReviews, updateReview, deleteReview }
-

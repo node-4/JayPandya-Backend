@@ -1,6 +1,5 @@
-const mongoose = require('mongoose');
-const toJSON = require('./plugins/index');
-
+import mongoose from 'mongoose';
+import toJSON from './plugins/index';
 
 const categorySchema = mongoose.Schema(
   {
@@ -38,4 +37,4 @@ categorySchema.index({ name: 1, image: 1 }, { unique: true });
 
 const Category = mongoose.model('Category', categorySchema);
 
-module.exports = Category;
+export default Category;

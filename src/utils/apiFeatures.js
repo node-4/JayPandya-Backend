@@ -1,7 +1,6 @@
 // Utils
-const catchAsync = require('./catchAsync');
-const AppError = require('./appError');
-
+import catchAsync from './catchAsync';
+import AppError from './appError';
 
 const apiFeatures = catchAsync(async (req, model, populate) => {
   let query;
@@ -80,4 +79,4 @@ const apiFeatures = catchAsync(async (req, model, populate) => {
   return query;
 });
 
-module.exports = apiFeatures;
+export default apiFeatures;

@@ -1,8 +1,8 @@
 // Utils
-const catchAsync = require('../utils/catchAsync');
+import catchAsync from '../utils/catchAsync';
 
 // Services
-const { userService } = require('../services/index');
+import { userService } from '../services/index';
 
 /**
  * @desc      Create New User Controller
@@ -12,7 +12,7 @@ const { userService } = require('../services/index');
  * @property  { Object } req.file - User image
  * @returns   { JSON } - A JSON object representing the type, message and user data
  */
-const createUser = catchAsync(async (req, res) => {
+export const createUser = catchAsync(async (req, res) => {
   // 1) Create new user
   const { type, message, statusCode, user } = await userService.createUser(
     req.body,
@@ -45,7 +45,7 @@ const createUser = catchAsync(async (req, res) => {
  * @property  { Number } req.query.limit - Maximum number of users in page
  * @returns   { JSON } - A JSON object representing the type, message and users
  */
-const getUsers = catchAsync(async (req, res) => {
+export const getUsers = catchAsync(async (req, res) => {
   let { page, sort, limit, select } = req.query;
 
   // 1) Setting default params
@@ -82,7 +82,7 @@ const getUsers = catchAsync(async (req, res) => {
  * @property  { String } req.params.id - User ID
  * @returns   { JSON } - A JSON object representing the type, message, and user data
  */
-const getUser = catchAsync(async (req, res) => {
+export const getUser = catchAsync(async (req, res) => {
   // 1) Find User Document By It's ID Controller
   const { type, message, statusCode, user } = await userService.queryUser(
     req.params.id
@@ -112,7 +112,7 @@ const getUser = catchAsync(async (req, res) => {
  * @property  { Object } req.user - An object contains logged in user data
  * @returns   { JSON } - A JSON object representing the type, message and user data
  */
-const updateUserDetails = catchAsync(async (req, res) => {
+export const updateUserDetails = catchAsync(async (req, res) => {
   // 1) Find user document and update it's details
   const { type, message, statusCode, user } =
     await userService.updateUserDetails(req.pata, req.body);
@@ -141,7 +141,7 @@ const updateUserDetails = catchAsync(async (req, res) => {
  * @property  { Object } req.user - An object contains logged in user data
  * @returns   { JSON } - A JSON object representing the type, message and user data
  */
-const updateUserProfileImage = catchAsync(async (req, res) => {
+export const updateUserProfileImage = catchAsync(async (req, res) => {
   // 1) Find user document and update it's profile image
   const { type, message, statusCode, user } =
     await userService.updateUserProfileImage(req.user, req.file);
@@ -169,7 +169,7 @@ const updateUserProfileImage = catchAsync(async (req, res) => {
  * @property  { String } req.params.id - User ID
  * @returns   { JSON } - A JSON object representing the type and message
  */
-const deleteUser = catchAsync(async (req, res) => {
+export const deleteUser = catchAsync(async (req, res) => {
   // 1) Find user document and delete it
   const { type, message, statusCode } = await userService.deleteUser(
     req.params.id
@@ -197,7 +197,7 @@ const deleteUser = catchAsync(async (req, res) => {
  * @property  { Object } req.user - An object contains logged in user data
  * @returns   { JSON } - A JSON object representing the type and message
  */
-const deleteMyAccount = catchAsync(async (req, res) => {
+export const deleteMyAccount = catchAsync(async (req, res) => {
   // 1) Find user document and delete it
   const { type, message, statusCode } = await userService.deleteMyAccount(
     req.params.id
@@ -217,4 +217,3 @@ const deleteMyAccount = catchAsync(async (req, res) => {
     message: req.polyglot.t(message)
   });
 });
-module.exports = { createUser, getUser, getUsers, updateUserDetails, updateUserProfileImage, deleteUser, deleteMyAccount }

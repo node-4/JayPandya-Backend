@@ -1,4 +1,4 @@
-const getAllProducts = {
+export const getAllProducts = {
   security: {
     jwt: []
   },
@@ -229,7 +229,7 @@ const getAllProducts = {
   }
 };
 
-const getProduct = {
+export const getProduct = {
   security: {
     jwt: []
   },
@@ -424,7 +424,7 @@ const getProduct = {
   }
 };
 
-const addProduct = {
+export const addProduct = {
   tags: ['Product'],
   description: 'This route allow only admin and seller to add new product',
   opeationId: 'addProduct',
@@ -657,7 +657,7 @@ const addProduct = {
   }
 };
 
-const top5Cheap = {
+export const top5Cheap = {
   security: {
     jwt: []
   },
@@ -880,7 +880,7 @@ const top5Cheap = {
   }
 };
 
-const productStats = {
+export const productStats = {
   tags: ['Product'],
   description:
     'This route allow only admin to get some statistics about products, ratings, categories, and price',
@@ -962,7 +962,7 @@ const productStats = {
   }
 };
 
-const addProductColor = {
+export const addProductColor = {
   tags: ['Product'],
   description: 'This route allow only admin or seller add new product color',
   opeationId: 'addProductColor',
@@ -1079,7 +1079,7 @@ const addProductColor = {
   }
 };
 
-const addProductSize = {
+export const addProductSize = {
   tags: ['Product'],
   description: 'This route allow only admin or seller add new product size',
   opeationId: 'addProductSize',
@@ -1196,7 +1196,7 @@ const addProductSize = {
   }
 };
 
-const updateProductDetails = {
+export const updateProductDetails = {
   tags: ['Product'],
   description:
     'This route allow only admin or seller to update product details',
@@ -1295,7 +1295,7 @@ const updateProductDetails = {
   }
 };
 
-const updateProductMainImage = {
+export const updateProductMainImage = {
   tags: ['Product'],
   description:
     'This route allow only seller or admin to update product main image [ mainImage ]',
@@ -1374,7 +1374,7 @@ const updateProductMainImage = {
   }
 };
 
-const updateProductImages = {
+export const updateProductImages = {
   tags: ['Product'],
   description:
     'This route allow only seller or admin to update product images [ images ]',
@@ -1473,7 +1473,7 @@ const updateProductImages = {
   }
 };
 
-const deleteProduct = {
+export const deleteProduct = {
   tags: ['Product'],
   description:
     "This route allow logged in seller/admin to delete product using it's ID",
@@ -1536,7 +1536,7 @@ const deleteProduct = {
   }
 };
 
-const deleteProductColor = {
+export const deleteProductColor = {
   tags: ['Product'],
   description:
     "This route allow logged in seller/admin to delete product color using it's ID",
@@ -1603,7 +1603,7 @@ const deleteProductColor = {
   }
 };
 
-const deleteProductSize = {
+export const deleteProductSize = {
   tags: ['Product'],
   description:
     "This route allow logged in seller/admin to delete product size using it's ID",
@@ -1670,9 +1670,9 @@ const deleteProductSize = {
   }
 };
 
-const getAllProduct = {
-  security: {
-    jwt: []
+export const getAllProduct = {
+  security : {
+    jwt : []
   },
   tags: ['Product'],
   description: "This route allow you to get all Product ",
@@ -1691,18 +1691,18 @@ const getAllProduct = {
       description: 'Product '
     }
   ],
-  responses: {
-    200: {
+  responses:  {
+    200 : {
       description: 'Get Product ',
       content: {
         'application/json': {
           schema: {
-            type: 'object',
+            type: 'object', 
             properties: {
               type: {
-                type: "string",
+                type: "string", 
                 example: "Success"
-              },
+              }, 
               message: {
                 type: 'string',
                 example: 'Product  Data Found '
@@ -1749,7 +1749,7 @@ const getAllProduct = {
                       type: 'array',
                       items: {
                         type: "string",
-                        example: 'EcommerceAPI/Products/LenovoYoga914ITL5Laptop-IntelCorei7-1185G7,14InchUHD,1TBSSD,16GBRAM,IntegratedIntelIrisXeGraphics,Windows-ShadowBlack/kxrk6ijsf0osjxnnyuq2'
+                        example:  'EcommerceAPI/Products/LenovoYoga914ITL5Laptop-IntelCorei7-1185G7,14InchUHD,1TBSSD,16GBRAM,IntegratedIntelIrisXeGraphics,Windows-ShadowBlack/kxrk6ijsf0osjxnnyuq2'
                       }
                     },
                     bullet_text: {
@@ -1767,15 +1767,14 @@ const getAllProduct = {
                       type: 'string',
                       example: '2021-08-20T08:10:45.242Z'
                     },
-
-                  }
-                }
+                  
               }
             }
           }
+        }
         }
       }
     }
   }
 }
-module.exports = { getAllProducts, getProduct, addProduct, top5Cheap, productStats, addProductColor, addProductSize, updateProductDetails, updateProductImages, updateProductMainImage, deleteProduct, deleteProductColor, deleteProductSize, getAllProduct }
+}

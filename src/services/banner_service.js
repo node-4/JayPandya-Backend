@@ -1,8 +1,11 @@
-const catchAsync = require('../utils/catchAsync');
-const APIFeatures = require('../utils/apiFeatures');
-const dataUri = require('../utils/datauri');
-const { uploadFile, destroyFile } = require('../utils/cloudinary');
-const { Banner } = require('../models/index');
+// Utils
+import catchAsync from '../utils/catchAsync';
+import APIFeatures from '../utils/apiFeatures';
+import dataUri from '../utils/datauri';
+import { uploadFile, destroyFile } from '../utils/cloudinary';
+
+// Models
+import { Banner } from '../models/index';
 
 /**
  * @desc    Create New Category
@@ -10,11 +13,11 @@ const { Banner } = require('../models/index');
  * @param   { Object } file - Category image
  * @returns { Object<type|message|statusCode|category> }
  */
-const createBanner = catchAsync(async (body) => {
-  const { description, image } = body;
+export const createBanner = catchAsync(async (body) => {
+  const {  description ,image} = body;
 
   // 1) Check if the user entered all fields
-  if (!description || !image) {
+  if ( !description || !image) {
     return {
       type: 'Error',
       message: 'fieldsRequired',
@@ -26,10 +29,10 @@ const createBanner = catchAsync(async (body) => {
   const folderName = `Category/${description.trim().split(' ').join('')}`;
 
   // 3) Generate a buffer instance from a data uri string
-  // let image = dataUri(file);
+ // let image = dataUri(file);
 
   // 4) Upload image to cloudinary
-  // image = await uploadFile(image.content, folderName, 600);
+ // image = await uploadFile(image.content, folderName, 600);
 
   // 5) Create body
   const object = {
@@ -54,7 +57,7 @@ const createBanner = catchAsync(async (body) => {
  * @param   { Object } req - Request object
  * @returns { Object<type|message|statusCode|categories> }
  */
-//  const queryCategories = catchAsync(async (req) => {
+// export const queryCategories = catchAsync(async (req) => {
 //   // 1) Get all categories
 //   const categories = await Category.find().populate('userId').lean()
 
@@ -80,22 +83,21 @@ const createBanner = catchAsync(async (body) => {
  * 
  */
 
-const getAllBanner = catchAsync(async () => {
-  const banner = await Banner.find();
-  if (banner.length === 0) {
-    return {
-      type: "Error",
-      statusCode: 400,
-      message: "No Banner Found "
-      ,
+export const getAllBanner = catchAsync(async() => {
+    const banner = await Banner.find();
+    if(banner.length === 0){
+        return {
+            type: "Error",
+            statusCode: 400,
+            message:"No Banner Found "
+,        }
     }
-  }
-  return {
-    type: "Success",
-    statusCode: 200,
-    message: "Banner Data",
-    banner: banner
-  }
+    return {
+        type: "Success",
+        statusCode: 200,
+        message: "Banner Data",
+        banner: banner
+    }
 })
 
 
@@ -104,7 +106,7 @@ const getAllBanner = catchAsync(async () => {
 //  * @param   { String } id - Category ID
 //  * @returns { Object<type|message|statusCode|category> }
 //  */
-//  const queryCategory = catchAsync(async (id) => {
+// export const queryCategory = catchAsync(async (id) => {
 //   console.log("UII")
 //   const category = await Category.find().populate('userId').lean()
 
@@ -132,7 +134,7 @@ const getAllBanner = catchAsync(async () => {
 //  * @param   { Object } body - Category details
 //  * @returns { Object<type|message|statusCode|category> }
 //  */
-const updateBannerDetails = catchAsync(async (id, body) => {
+export const updateBannerDetails = catchAsync(async (id, body) => {
   let category = await Banner.findById(id);
 
   // 1) Check if category doesn't exist
@@ -165,7 +167,7 @@ const updateBannerDetails = catchAsync(async (id, body) => {
  * @param   { Object } image - Category image
  * @returns { Object<type|message|statusCode|category> }
  */
-const updateBannerImage = catchAsync(async (id, image) => {
+export const updateBannerImage = catchAsync(async (id, image) => {
   // 1) Check if image provided
   if (image === undefined) {
     return {
@@ -215,7 +217,7 @@ const updateBannerImage = catchAsync(async (id, image) => {
   };
 });
 
-//  const getCategryBySelleId = catchAsync(async(userId) => {
+// export const getCategryBySelleId = catchAsync(async(userId) => {
 //   const category = await Category.find({userId:userId });
 //   if(category.length === 0){
 //     return {
@@ -237,7 +239,7 @@ const updateBannerImage = catchAsync(async (id, image) => {
  * @param   { String } id - Category ID
  * @returns { Object<type|message|statusCode> }
  */
-const deleteBannerById = catchAsync(async (id) => {
+export const deleteBannerById = catchAsync(async (id) => {
   const banner = await Banner.findById(id);
 
   // 1) Check if category doesn't exist
@@ -250,7 +252,7 @@ const deleteBannerById = catchAsync(async (id) => {
   }
 
   // 2) Destroy category image
-  //   destroyFile(banner.imageId);
+//   destroyFile(banner.imageId);
 
   // 3) Delete category
   await Banner.findByIdAndDelete(id);
@@ -263,20 +265,20 @@ const deleteBannerById = catchAsync(async (id) => {
   };
 });
 
-const BannerfindId = catchAsync(async (id) => {
-  const banner = await Banner.findById({ _id: id });
-  if (!banner) {
-    return {
-      type: "Error",
-      statusCode: 400,
-      message: "NoBannerFound"
+export const BannerfindId = catchAsync(async(id) => {
+    const banner = await Banner.findById({_id: id});
+    if(!banner){
+        return {
+            type: "Error", 
+            statusCode: 400,
+            message: "NoBannerFound"
+        }
     }
-  }
-  return {
-    type: "Success",
-    statusCode: 200,
-    message: "Banner Data",
-    banner: banner
-  }
+    return {
+        type: "Success",
+        statusCode: 200,
+        message:"Banner Data",
+        banner: banner
+    }
 })
-module.exports = { createBanner, getAllBanner, updateBannerDetails, updateBannerImage, deleteBannerById, BannerfindId };
+

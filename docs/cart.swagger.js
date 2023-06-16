@@ -1,4 +1,4 @@
-const getCart = {
+export const getCart = {
   tags: ['Cart'],
   description: 'This route allow logged in user/seller/admin to get his cart',
   opeationId: 'getCart',
@@ -121,7 +121,7 @@ const getCart = {
   }
 };
 
-const addItemsToCart = {
+export const addItemsToCart = {
   security: {
     jwt: []
   },
@@ -296,7 +296,7 @@ const addItemsToCart = {
   }
 };
 
-const increaseProductQuantityByOne = {
+export const increaseProductQuantityByOne = {
   tags: ['Cart'],
   description:
     'This route allow logged in user/seller/admin to increase product quantity by one',
@@ -452,7 +452,7 @@ const increaseProductQuantityByOne = {
   }
 };
 
-const reduceProductQuantityByOne = {
+export const reduceProductQuantityByOne = {
   tags: ['Cart'],
   description:
     'This route allow logged in user/seller/admin to reduce product quantity by one',
@@ -604,7 +604,7 @@ const reduceProductQuantityByOne = {
   }
 };
 
-const deleteProductFromCart = {
+export const deleteProductFromCart = {
   tags: ['Cart'],
   description:
     'This route allow logged in user/seller/admin to delete product from cart',
@@ -691,7 +691,7 @@ const deleteProductFromCart = {
   }
 };
 
-const deleteCart = {
+export const deleteCart = {
   tags: ['Cart'],
   description: 'This route allow logged in user/seller/admin to delete cart',
   opeationId: 'deleteCart',
@@ -746,4 +746,3 @@ const deleteCart = {
     }
   }
 };
-module.exports = { getCart, addItemsToCart, increaseProductQuantityByOne, reduceProductQuantityByOne, deleteProductFromCart, deleteCart };

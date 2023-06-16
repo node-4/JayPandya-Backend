@@ -1,4 +1,4 @@
-const getAllUsers = {
+export const getAllUsers = {
   security: {
     jwt: []
   },
@@ -156,7 +156,7 @@ const getAllUsers = {
   }
 };
 
-const getUser = {
+export const getUser = {
   security: {
     jwt: []
   },
@@ -278,7 +278,7 @@ const getUser = {
   }
 };
 
-const addUser = {
+export const addUser = {
   tags: ['User'],
   description: 'This route allow only admin to add new user',
   opeationId: 'addUser',
@@ -464,7 +464,7 @@ const addUser = {
   }
 };
 
-const updateUserDetails = {
+export const updateUserDetails = {
   tags: ['User'],
   description:
     'This route allow logged in user to update his own profile details',
@@ -628,7 +628,7 @@ const updateUserDetails = {
   }
 };
 
-const updateUserProfileImage = {
+export const updateUserProfileImage = {
   tags: ['User'],
   description:
     'This route allow logged in user to update his own profile image',
@@ -702,7 +702,7 @@ const updateUserProfileImage = {
   }
 };
 
-const deleteUser = {
+export const deleteUser = {
   tags: ['User'],
   description:
     "This route allow only admin to delete user account using it's ID",
@@ -765,7 +765,7 @@ const deleteUser = {
   }
 };
 
-const deleteMyAccount = {
+export const deleteMyAccount = {
   tags: ['User'],
   description: 'This route allow logged in user to delete his account',
   opeationId: 'deleteMyAccount',
@@ -800,4 +800,3 @@ const deleteMyAccount = {
     }
   }
 };
-module.exports = { getAllUsers, getUser, addUser, updateUserDetails, updateUserProfileImage, deleteUser, deleteMyAccount }

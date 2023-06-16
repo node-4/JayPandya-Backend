@@ -1,6 +1,6 @@
 // Packages
-const multer = require('multer');
-const AppError = require('./appError');
+import multer from 'multer';
+import AppError from './appError';
 
 const storage = multer.memoryStorage();
 
@@ -23,7 +23,7 @@ const fileFilter = (req, file, cb) => {
  * Upload single image
  * @param {String} name
  */
-const singleFile = (name) => (req, res, next) => {
+export const singleFile = (name) => (req, res, next) => {
   const upload = multer({
     storage,
     limits,
@@ -45,7 +45,7 @@ const singleFile = (name) => (req, res, next) => {
 /**
  * Upload any number of images with any name
  */
-const anyMulter = () => (req, res, next) => {
+export const anyMulter = () => (req, res, next) => {
   const upload = multer({
     storage,
     limits,
@@ -57,4 +57,3 @@ const anyMulter = () => (req, res, next) => {
     next();
   });
 };
-module.exports = { anyMulter, singleFile }

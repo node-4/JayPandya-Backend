@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
-const logger = require('./logger');
-const config = require('./config');
+import mongoose from 'mongoose';
+import logger from './logger';
+import config from './config';
 
 /**
  * Connect To Database
@@ -16,14 +16,14 @@ const connectDB = async () => {
     autoIndex: true
   });
 
-  console.log(`MongoDB Connected: ${con.connection.host}.`);
+  logger.info(`MongoDB Connected: ${con.connection.host}.`);
 
   mongoose.connection.on('connecting', () => {
-    console.log('Connecting to Database');
+    logger.info('Connecting to Database');
   });
 
   mongoose.connection.on('connected', () => {
-    console.log('Mongoose Connected to Database');
+    logger.info('Mongoose Connected to Database');
   });
 
   mongoose.connection.on('error', (err) => {
@@ -31,7 +31,7 @@ const connectDB = async () => {
   });
 
   mongoose.connection.on('disconnected', () => {
-    console.log('Mongoose Connection is Disconnected.');
+    logger.info('Mongoose Connection is Disconnected.');
   });
 
   process.on('SIGINT', async () => {
@@ -39,4 +39,5 @@ const connectDB = async () => {
     process.exit(0);
   });
 };
-module.exports =connectDB;
+
+export default connectDB;

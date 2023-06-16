@@ -1,8 +1,8 @@
-const express = require('express');
+import express from 'express';
 
-const { supportAndHelp } = require('../controllers');
+import { supportAndHelp } from '../controllers';
 
-const {
+const  {
     AddSupport,
     GetSupport,
     DeleSupport,
@@ -11,7 +11,7 @@ const {
     GetHelp,
     DeleHelp,
     UpdateHelp,
-} = supportAndHelp
+} =   supportAndHelp
 
 const router = express();
 

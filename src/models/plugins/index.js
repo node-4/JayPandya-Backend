@@ -1,3 +1,3 @@
-const toJSON = require('./toJSON.plugin');
+import toJSON from './toJSON.plugin';
 
-module.exports = toJSON;
+export default toJSON;

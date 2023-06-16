@@ -1,11 +1,11 @@
 // Packages
-const express = require('express');
+import express from 'express';
 
 // Middlewares
-const protect = require('../middlewares/protect');
-const restrictedTo = require('../middlewares/restrictedTo');
+import protect from '../middlewares/protect';
+import restrictedTo from '../middlewares/restrictedTo';
 // Controllers
-const {
+import {
   createUser,
   getUsers,
   getUser,
@@ -13,11 +13,10 @@ const {
   updateUserProfileImage,
   deleteUser,
   deleteMyAccount
-} = require('../controllers/user.controller');
+} from '../controllers/user.controller';
 
 // Utils
-const { singleFile } = require('../utils/multer');
-
+import { singleFile } from '../utils/multer';
 
 // Router Initialization
 const router = express.Router();
@@ -48,6 +47,6 @@ router.patch(
 router.delete('/me/:id', deleteMyAccount);
 
 // Delete User Route
-router.delete('/:id', deleteUser);
+router.delete('/:id',  deleteUser);
 
-module.exports = router;
+export default router;

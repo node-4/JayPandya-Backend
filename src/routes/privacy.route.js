@@ -1,7 +1,7 @@
-const express = require('express');
+import express from 'express';
 
 // Controllers 
-const { privactContrller } = require('../controllers');
+import { privactContrller } from '../controllers';
 
 
 const {
@@ -19,6 +19,6 @@ router.route('/').get(getprivacy).post(addprivacy);
 router.route('/:id').patch(updateprivacy).delete(deleteprivacy)
 
 
-module.exports = router;
+export default router;
 
 

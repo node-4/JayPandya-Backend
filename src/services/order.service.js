@@ -1,20 +1,17 @@
 /* eslint-disable no-await-in-loop */
 // Packages
-const moment = require('moment');
-const STRIPE_SDK = require('stripe');
+import STRIPE_SDK from 'stripe';
+import moment from 'moment';
 
 // Utils
-const catchAsync = require('../utils/catchAsync');
-
-const APIFeatures = require('../utils/apiFeatures');
-
+import catchAsync from '../utils/catchAsync';
+import APIFeatures from '../utils/apiFeatures';
 
 // Configs
-const config = require('../config/config');
-
+import config from '../config/config';
 
 // Models
-const { Order, Cart, Product } = require('../models/index');
+import { Order, Cart, Product } from '../models/index';
 
 const stripe = STRIPE_SDK(config.stripe.secret_key);
 
@@ -24,11 +21,11 @@ const stripe = STRIPE_SDK(config.stripe.secret_key);
  * @param   { Object } user - An object contains logged in user data
  * @returns { Object<type|message|statusCode|order> }
  */
-const createOrder = catchAsync(async (body, user) => {
+export const createOrder = catchAsync(async (body, user) => {
   // 1) Extract data from parameters
   const { shippingAddress, paymentMethod, phone } = body;
   const { address, city, country, postalCode } = shippingAddress;
-  console.log(user)
+console.log(user)
   // 2) Check if user entered all fields
   if (
     !address ||
@@ -133,7 +130,7 @@ const createOrder = catchAsync(async (body, user) => {
     paidAt: moment(),
     shippingAddress,
     paymentMethod,
-    //  paymentStripeId: charge.id,
+  //  paymentStripeId: charge.id,
     phone
   });
 
@@ -169,7 +166,7 @@ const createOrder = catchAsync(async (body, user) => {
  * @param   { String } id - Order ID
  * @returns { Object<type|message|statusCode> }
  */
-const orderStatus = catchAsync(async (status, id) => {
+export const orderStatus = catchAsync(async (status, id) => {
   // 1) All fields are required
   if (!status) {
     return {
@@ -253,7 +250,7 @@ const orderStatus = catchAsync(async (status, id) => {
  * @param   { Object } req - Request object
  * @returns { Object<type|message|statusCode|orders> }
  */
-const queryOrders = catchAsync(async (req) => {
+export const queryOrders = catchAsync(async (req) => {
   // req.query.user = req.user._id;
 
   // 1) Get all orders
@@ -280,7 +277,7 @@ const queryOrders = catchAsync(async (req) => {
  * @param   { String } id - Order ID
  * @returns { Object<type|message|statusCode|order> }
  */
-const queryOrder = catchAsync(async () => {
+export const queryOrder = catchAsync(async () => {
   // 1) Get order document using it's ID
   const order = await Order.find();
 
@@ -307,7 +304,7 @@ const queryOrder = catchAsync(async () => {
  * @param   { String } id - Order ID
  * @returns { Object<type|message|statusCode> }
  */
-const cancelOrder = catchAsync(async (id) => {
+export const cancelOrder = catchAsync(async (id) => {
   // 1) Find order document and delete it
   const order = await Order.findById(id);
 
@@ -347,4 +344,3 @@ const cancelOrder = catchAsync(async (id) => {
     statusCode: 200
   };
 });
-module.exports = { createOrder, orderStatus, queryOrders, queryOrder, cancelOrder }

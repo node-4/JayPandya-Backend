@@ -1,11 +1,11 @@
-const express = require('express');
+import express from 'express';
 
 // Controllers 
-const { termControllers } = require('../controllers');
+import { termControllers } from '../controllers';
 
 
 const {
-  addTerms,
+    addTerms,
   getTerms,
   updateTerms,
   deleteTerms
@@ -19,6 +19,6 @@ router.route('/').get(getTerms).post(addTerms);
 router.route('/:id').patch(updateTerms).delete(deleteTerms)
 
 
-module.exports = router;
+export default router;
 
 

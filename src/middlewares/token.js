@@ -1,9 +1,13 @@
 // Packages
-const jwt = require("jsonwebtoken");
-const moment = require("moment");
-const config = require("../config/config");
-const tokenTypes = require("../config/tokens");
-const { User, Token } = require('../models/index');
+import jwt from 'jsonwebtoken';
+import moment from 'moment';
+
+// Configs
+import config from '../config/config';
+import tokenTypes from '../config/tokens';
+
+// Models
+import { User, Token } from '../models/index';
 
 /**
  * Generate token
@@ -12,7 +16,7 @@ const { User, Token } = require('../models/index');
  * @param   { String }    type
  * @returns { String }
  */
-const generateToken = (
+export const generateToken = (
   userId,
   expires,
   type,
@@ -35,7 +39,7 @@ const generateToken = (
  * @param   { String }    type
  * @returns { Promise <Token> }
  */
-const saveToken = async (token, userId, expires, type) => {
+export const saveToken = async (token, userId, expires, type) => {
   const tokenDoc = await Token.create({
     token,
     user: userId,
@@ -52,7 +56,7 @@ const saveToken = async (token, userId, expires, type) => {
  * @param   { String } type
  * @returns { Promise <Token> }
  */
-const verifyToken = async (token, type) => {
+export const verifyToken = async (token, type) => {
   const payload = jwt.verify(token, config.jwt.secret);
 
   const tokenDoc = await Token.findOne({
@@ -77,7 +81,7 @@ const verifyToken = async (token, type) => {
  * @param   { Object } user
  * @returns { Promise <Tokens> }
  */
-const generateAuthTokens = async (user) => {
+export const generateAuthTokens = async (user) => {
   const accessTokenExpires = moment().add(
     config.jwt.accessExpirationMinutes,
     'minutes'
@@ -118,7 +122,7 @@ const generateAuthTokens = async (user) => {
  * @param   { String } email
  * @returns { Promise <Token> }
  */
-const generateResetPasswordToken = async (email) => {
+export const generateResetPasswordToken = async (email) => {
   // 1) Extract user data from database
   const user = await User.findOne({ email });
 
@@ -157,7 +161,7 @@ const generateResetPasswordToken = async (email) => {
  * @param   { Object } user
  * @returns { Promise <Token> }
  */
-const generateVerifyEmailToken = async (user) => {
+export const generateVerifyEmailToken = async (user) => {
   const expires = moment().add(
     config.jwt.verifyEmailExpirationMinutes,
     'minutes'
@@ -173,4 +177,3 @@ const generateVerifyEmailToken = async (user) => {
 
   return verifyEmailToken;
 };
-module.exports = { generateToken, saveToken, verifyToken, generateAuthTokens, generateResetPasswordToken, generateVerifyEmailToken };

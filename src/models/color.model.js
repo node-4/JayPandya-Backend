@@ -1,9 +1,8 @@
 // Packages
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 // Plugins
-const toJSON = require('./plugins/index');
-
+import toJSON from './plugins/index';
 
 const colorSchema = mongoose.Schema(
   {
@@ -27,4 +26,4 @@ colorSchema.plugin(toJSON);
 
 const Color = mongoose.model('Color', colorSchema);
 
-module.exports = Color;
+export default Color;
