@@ -50,8 +50,8 @@ const config = {
     port: envVars.PORT
   },
   db: {
-    url: envVars.DATABASE_CONNECTION,
-    password: envVars.DATABASE_PASSWORD
+    url: "mongodb+srv://jaypanda:<password>@jay.uvoxkja.mongodb.net/?retryWrites=true&w=majority",
+    password: "jaypanda"
   },
   jwt: {
     secret: envVars.JWT_SECRET,
