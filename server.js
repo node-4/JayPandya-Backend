@@ -1,20 +1,15 @@
 const express = require('express');
-const helmet = require('helmet');
-const xss = require('xss-clean');
+// const helmet = require('helmet');
+// const xss = require('xss-clean');
 const compression = require('compression');
 const cors = require('cors');
-const mongoSanitize = require('express-mongo-sanitize');
+// const mongoSanitize = require('express-mongo-sanitize');
 const swaggerUI = require('swagger-ui-express');
+const env = require('dotenv');
 const createLocaleMiddleware = require('express-locale');
-const config = require('./src/config/config');
-const { successHandle, errorHandle } = require('./src/config/morgan');
-const limiter = require('./src/middlewares/rateLimiter');
-const errorHandler = require('./src/utils/errorHandler');
-const AppError = require('./src/utils/appError');
-const startPolyglot = require('./src/utils/startPolyglot');
+// const startPolyglot = require('./src/utils/startPolyglot');
 const docs = require('./docs/swagger');
 const routes = require('./src/routes');
-const logger = require('./src/config/logger');
 const serverless = require('serverless-http')
 const app = express();
 app.enable('trust proxy');
@@ -26,16 +21,39 @@ app.use(
     default: 'en_US'
   })
 );
-app.use(startPolyglot);
-app.use(xss());
-app.use(mongoSanitize());
+// app.use(startPolyglot);
+// app.use(xss());
+// app.use(mongoSanitize());
 app.use(cors());
 app.options('*', cors());
 app.use(compression());
 app.disable('x-powered-by');
-if (config.env === 'production') {
-  app.use('/api', limiter);
-}
+app.use((err, req, res, next) => {
+  res.locals.message = err.message;
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+  // render the error page
+  res.status(err.status || 500);
+  if (err.status) {
+      console.log(err);
+      console.log('error middleware');
+      return res.status(err.status).json({
+          msg: err.message
+      })
+
+  } else {
+
+      console.log(err);
+      console.log('error middleware status not given');
+      return res.status(500).json({
+          msg: err.message
+      })
+  }
+
+})
+
+
+
 app.get('/', (req, res) => {
   res.status(200).json({
     message: "App Start"
@@ -50,7 +68,7 @@ mongoose.connect("mongodb+srv://jaypanda:jaypanda@jay.uvoxkja.mongodb.net/?retry
   console.log(err);
 });
 
-const serverPort = config.server.port;
+const serverPort = process.env.PORT;
 app.listen(serverPort, () => {
   console.log(`listening on port ${serverPort}`);
 });
