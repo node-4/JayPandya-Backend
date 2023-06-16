@@ -15,7 +15,6 @@ const startPolyglot = require('./src/utils/startPolyglot');
 const docs = require('./docs/swagger');
 const routes = require('./src/routes');
 const logger = require('./src/config/logger');
-const connectDB = require('./src/config/db');
 const serverless = require('serverless-http')
 const app = express();
 app.enable('trust proxy');
@@ -44,43 +43,17 @@ app.get('/', (req, res) => {
 })
 app.use('/api', routes);
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(docs));
-
-// Connect to MongoDB
-connectDB();
+const mongoose = require('mongoose');
+mongoose.connect("mongodb+srv://jaypanda:jaypanda@jay.uvoxkja.mongodb.net/?retryWrites=true&w=majority").then(() => {
+  console.log("Db conneted succesfully");
+}).catch((err) => {
+  console.log(err);
+});
 
 const serverPort = config.server.port;
-
-const server = app.listen(serverPort, () => {
+app.listen(serverPort, () => {
   console.log(`listening on port ${serverPort}`);
 });
-
-const exitHandler = () => {
-  if (server) {
-    server.close(() => {
-      logger.info('Server closed');
-      process.exit(1);
-    });
-  } else {
-    process.exit(1);
-  }
-};
-
-const unexpectedErrorHandler = (error) => {
-  logger.error(error);
-  exitHandler();
-};
-
-process.on('uncaughtException', unexpectedErrorHandler);
-process.on('unhandledRejection', unexpectedErrorHandler);
-
-process.on('SIGTERM', () => {
-  logger.info('SIGTERM received');
-  if (server) {
-    server.close();
-  }
-});
-
-
 module.exports = {
   handler: serverless(app)
 }
